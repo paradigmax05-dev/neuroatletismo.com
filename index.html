@@ -2,10 +2,618 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Neuroatletismo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NEUROATLETISMO™ | Entrenamiento cognitivo de alto rendimiento</title>
+  <meta name="description" content="El primer sistema de entrenamiento cognitivo de alto rendimiento basado en evidencia.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+  <script>document.documentElement.classList.add('js');</script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: { ink: '#050505', coal: '#111111', line: '#222222', mute: '#A1A1AA', volt: '#0047FF', neon: '#D4FF00', hot: '#FF0055' },
+          fontFamily: {
+            display: ['"Bebas Neue"', 'Impact', 'sans-serif'],
+            mono: ['"Space Mono"', '"Courier New"', 'monospace'],
+            body: ['Inter', 'Roboto', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    html { scroll-behavior: smooth; overflow-x: hidden; background: #050505; }
+    body { background: #050505; color: #A1A1AA; font-family: 'Inter', Roboto, sans-serif; font-weight: 300; line-height: 1.7; -webkit-font-smoothing: antialiased; overflow-x: hidden; overflow-x: clip; }
+    * { border-radius: 0 !important; }
+    ::selection { background: #D4FF00; color: #000; }
+    section[id] { scroll-margin-top: 70px; }
+
+    .display { font-family: 'Bebas Neue', Impact, sans-serif; font-style: italic; text-transform: uppercase; line-height: .9; color: #fff; }
+    .mono { font-family: 'Space Mono', 'Courier New', monospace; }
+
+    /* ---------- Header (sticky + shrink, como Stamina) ---------- */
+    #hdr { padding: 1.5rem 0; transition: padding .3s ease, background-color .3s ease, border-color .3s ease; border-bottom: 1px solid transparent; }
+    #hdr.shrink { padding: .6rem 0; background: rgba(0,0,0,.85); backdrop-filter: blur(10px); border-bottom-color: #222; }
+    .nav-link { display: inline-block; padding: 5px 18px; color: #fff; font-size: 14px; border-bottom: 2px solid transparent; transition: border-color .25s, color .25s; }
+    .nav-link:hover { color: #D4FF00; }
+    .nav-link.active { border-bottom-color: #D4FF00; }
+
+    /* ---------- Botones ---------- */
+    .btn-out { display: inline-block; border: 2px solid #fff; color: #fff; text-transform: uppercase; font-weight: 900; font-size: 12px; letter-spacing: .12em; padding: 1rem 2.5rem; transition: all .25s ease; }
+    .btn-out:hover { background: #fff; color: #000; }
+    .btn-neon { display: inline-flex; align-items: center; justify-content: center; gap: .5rem; background: #D4FF00; border: 2px solid #D4FF00; color: #000; text-transform: uppercase; font-weight: 900; font-size: 12px; letter-spacing: .12em; padding: .8rem 1.4rem; transition: all .25s ease; cursor: pointer; }
+    .btn-neon:hover { background: transparent; color: #D4FF00; }
+    .btn-volt { display: inline-block; background: #0047FF; border: 2px solid #0047FF; color: #fff; text-transform: uppercase; font-weight: 900; font-size: 12px; letter-spacing: .12em; padding: 1rem 2.5rem; transition: all .25s ease; cursor: pointer; }
+    .btn-volt:hover { background: transparent; color: #0047FF; }
+
+    /* ---------- Hero ---------- */
+    .hero { position: relative; height: 100vh; min-height: 760px; background: #111 center/cover no-repeat; }
+    .hero::after { content: ""; position: absolute; inset: 0; background: rgba(0,0,0,.58); z-index: 1; }
+    .hero > .wrap { position: relative; z-index: 10; height: 100%; }
+    .hero-title { font-size: clamp(3.6rem, 10.5vw, 10rem); }
+
+    /* ---------- Barra inclinada (schedule-wrap) ---------- */
+    .skew-bar { position: relative; z-index: 9; background: #0047FF; color: #fff; padding: 2.5rem; max-width: 700px; transform: translateY(-50%); }
+    .skew-bar::before { content: ""; position: absolute; inset: 0; background: inherit; z-index: -1; transform-origin: bottom left; transform: skew(-12deg); }
+    .skew-bar2 { position: absolute; z-index: 9; right: 0; background: #0047FF; color: #fff; padding: 2.5rem; width: 90%; transform: translateY(-50%); }
+    @media (min-width: 768px) { .skew-bar2 { width: 50%; } }
+    .skew-bar2::before { content: ""; position: absolute; inset: 0; background: inherit; z-index: -1; transform-origin: bottom right; transform: skew(12deg); }
+
+    /* ---------- Encabezados de sección ---------- */
+    .sub { font-family: 'Space Mono', monospace; font-size: .8rem; letter-spacing: .3em; text-transform: uppercase; color: #D4FF00; }
+    .heading { font-family: 'Bebas Neue', Impact, sans-serif; font-style: italic; text-transform: uppercase; color: #fff; font-size: clamp(3rem, 7vw, 6rem); line-height: .92; }
+
+    /* ---------- Capacidades (carrusel) ---------- */
+    .cap-track { display: flex; gap: 1.5rem; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding: 2rem 2px; }
+    .cap-track::-webkit-scrollbar { display: none; }
+    .cap-card { flex: 0 0 86%; scroll-snap-align: start; text-align: center; padding: 2.2rem 1.5rem; background: #111; border: 1px solid #222; transition: box-shadow .3s ease, border-color .3s ease, transform .3s ease; }
+    @media (min-width: 768px) { .cap-card { flex-basis: calc((100% - 1.5rem) / 2); } }
+    @media (min-width: 1024px) { .cap-card { flex-basis: calc((100% - 3rem) / 3); } }
+    .cap-card:hover { border-color: #0047FF; box-shadow: 0 0 30px -8px rgba(0,71,255,.6); transform: translateY(-4px); }
+    .cap-card svg { width: 64px; height: 64px; margin: 0 auto; stroke: #0047FF; fill: none; stroke-width: 1.5; stroke-linecap: square; stroke-linejoin: miter; transition: stroke .3s; }
+    .cap-card:hover svg { stroke: #D4FF00; }
+    .dot { width: 10px; height: 10px; background: #333; display: inline-block; margin: 5px; border: 0; cursor: pointer; transition: background .2s; }
+    .dot.on { background: #D4FF00; }
+
+    /* ---------- Bandas parallax ---------- */
+    .bgimg { position: relative; height: 500px; background: #111 center/cover no-repeat; background-attachment: fixed; display: flex; align-items: center; justify-content: center; text-align: center; padding: 0 1.25rem; }
+    .bgimg::before { content: ""; position: absolute; inset: 0; background: rgba(0,0,0,.6); }
+    .bgimg > div { position: relative; z-index: 2; max-width: 56rem; }
+    @media (max-width: 1023px) { .bgimg { background-attachment: scroll; height: 420px; } }
+
+    /* ---------- Frentes (class-item) ---------- */
+    .frente { display: flex; align-items: stretch; background: #111; border: 1px solid #222; overflow: hidden; position: relative; z-index: 1; transition: transform .3s ease, background-color .3s ease, color .3s ease, box-shadow .3s ease; color: var(--on); }
+    .frente .thumb { flex: 0 0 120px; overflow: hidden; background: #000; }
+    @media (min-width: 768px) { .frente .thumb { flex-basis: 220px; } }
+    .frente .thumb img { width: 100%; height: 100%; object-fit: cover; min-height: 120px; filter: grayscale(100%) contrast(1.15); transition: filter .4s, transform .6s; }
+    .frente .txt { padding: 1.4rem 1.6rem; display: flex; flex-direction: column; justify-content: center; }
+    .frente .tag { font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: .25em; text-transform: uppercase; color: var(--tag); transition: color .3s; }
+    .frente h3 { font-family: 'Bebas Neue', Impact, sans-serif; font-style: italic; text-transform: uppercase; font-size: clamp(2.2rem, 5vw, 3.6rem); line-height: .95; color: #fff; transition: color .3s; }
+    .frente p { color: #A1A1AA; transition: color .3s; margin-top: .35rem; }
+    .frente:hover { transform: scale(1.03); z-index: 2; background: var(--accent); box-shadow: 0 20px 50px -20px var(--accent); }
+    .frente:hover .tag, .frente:hover h3 { color: var(--on); }
+    .frente:hover p { color: var(--on); }
+    .frente:hover .thumb img { filter: grayscale(0); transform: scale(1.06); }
+
+    /* ---------- Protocolo (tabs) ---------- */
+    .tabs { display: grid; grid-template-columns: repeat(5, 1fr); margin-bottom: 3rem; }
+    .tab-btn { background: #111; color: #A1A1AA; padding: 14px 6px; text-align: center; font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; border: 0; border-right: 1px solid #050505; cursor: pointer; transition: background .2s, color .2s; }
+    .tab-btn:hover { color: #fff; background: #1b1b1b; }
+    .tab-btn[aria-selected="true"] { background: #0047FF; color: #fff; }
+    .bignum { font-family: 'Bebas Neue', Impact, sans-serif; font-style: italic; font-size: clamp(7rem, 16vw, 14rem); line-height: .8; color: transparent; -webkit-text-stroke: 1px #3a3a3a; }
+    .panel[hidden] { display: none; }
+    .panel { animation: fadein .4s ease; }
+    @keyframes fadein { from { opacity: 0; transform: translateY(8px) } to { opacity: 1; transform: none } }
+    .seg { height: 4px; flex: 1; background: #222; transition: background .3s; }
+    .seg.on { background: #D4FF00; }
+
+    /* ---------- Neuroatleta (ftco-feature) ---------- */
+    .trait { background: #111; border: 1px solid #222; padding: 2.5rem 2rem; text-align: left; transition: box-shadow .3s, transform .3s, border-color .3s; border-top: 4px solid var(--c); }
+    .trait:hover { transform: translateY(-6px); box-shadow: 0 20px 50px -20px var(--c); border-color: var(--c); }
+
+    /* ---------- Formularios ---------- */
+    .field { width: 100%; height: 52px; background: #050505; border: 2px solid #222; color: #fff; padding: 0 1rem; font-family: 'Inter', sans-serif; font-weight: 400; transition: border-color .2s; }
+    textarea.field { height: auto; padding: 1rem; }
+    .field:focus { outline: none; border-color: #D4FF00; }
+    .field::placeholder { color: #5b5b63; }
+    select.field { appearance: none; background-image: linear-gradient(45deg, transparent 50%, #A1A1AA 50%), linear-gradient(135deg, #A1A1AA 50%, transparent 50%); background-position: calc(100% - 20px) 22px, calc(100% - 14px) 22px; background-size: 6px 6px; background-repeat: no-repeat; }
+
+    .footer-links a { transition: color .2s; }
+    .footer-links a:hover { color: #D4FF00; }
+
+    /* ---------- Reveal (AOS) ---------- */
+    html.js .reveal { opacity: 0; transform: translateY(26px); transition: opacity .8s ease, transform .8s ease; }
+    html.js .reveal.in { opacity: 1; transform: none; }
+
+    /* ---------- Menú móvil (offcanvas) ---------- */
+    #mmenu { position: fixed; top: 0; right: 0; bottom: 0; width: min(82vw, 340px); background: #050505; border-left: 1px solid #222; z-index: 2500; transform: translateX(100%); visibility: hidden; transition: transform .35s ease, visibility .35s; padding: 2rem; }
+    #mmenu.open { transform: none; visibility: visible; }
+    #mshade { position: fixed; inset: 0; background: rgba(0,0,0,.65); z-index: 2400; opacity: 0; visibility: hidden; transition: opacity .3s; }
+    #mshade.open { opacity: 1; visibility: visible; }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      html.js .reveal { opacity: 1; transform: none; transition: none; }
+      .panel { animation: none; }
+    }
+  </style>
 </head>
+
 <body>
-  <h1>Neuroatletismo.com</h1>
-  <p>Próximamente.</p>
+
+  <!-- ===================== MENÚ MÓVIL ===================== -->
+  <div id="mshade"></div>
+  <aside id="mmenu" aria-label="Menú">
+    <button id="mclose" class="mono text-white text-xs tracking-[.25em] uppercase mb-10" aria-label="Cerrar menú">[ Cerrar × ]</button>
+    <ul class="space-y-5 font-display italic text-4xl uppercase text-white">
+      <li><a href="#inicio" class="mlink hover:text-neon">Inicio</a></li>
+      <li><a href="#manifiesto" class="mlink hover:text-neon">Manifiesto</a></li>
+      <li><a href="#frentes" class="mlink hover:text-neon">Frentes</a></li>
+      <li><a href="#protocolo" class="mlink hover:text-neon">Protocolo</a></li>
+      <li><a href="#neuroatleta" class="mlink hover:text-neon">Neuroatleta</a></li>
+      <li><a href="#acceso" class="mlink hover:text-neon">Acceso</a></li>
+    </ul>
+  </aside>
+
+  <!-- ===================== HEADER ===================== -->
+  <header id="hdr" class="fixed top-0 inset-x-0 z-[2000]" role="banner">
+    <div class="px-5 md:px-12 lg:px-28 flex items-center">
+      <a href="#inicio" class="text-white font-black text-lg md:text-xl uppercase tracking-tight">
+        NEUROATLETISMO<span class="text-neon">.</span><sup class="text-[10px] text-mute font-normal ml-0.5">™</sup>
+      </a>
+      <nav class="ml-auto hidden lg:block" aria-label="Principal">
+        <ul class="flex">
+          <li><a href="#inicio" class="nav-link">Inicio</a></li>
+          <li><a href="#manifiesto" class="nav-link">Manifiesto</a></li>
+          <li><a href="#frentes" class="nav-link">Frentes</a></li>
+          <li><a href="#protocolo" class="nav-link">Protocolo</a></li>
+          <li><a href="#neuroatleta" class="nav-link">Neuroatleta</a></li>
+          <li><a href="#acceso" class="nav-link">Acceso</a></li>
+        </ul>
+      </nav>
+      <button id="mopen" class="ml-auto lg:hidden text-white mono text-xs tracking-[.2em] uppercase border border-white/60 px-3 py-2" aria-label="Abrir menú">Menú ≡</button>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ===================== HERO ===================== -->
+    <section id="inicio" class="hero" style="background-image:url('hero.png')">
+      <div class="wrap px-5 pt-24 pb-36 flex items-center justify-center text-center">
+        <div class="max-w-5xl reveal in">
+          <p class="mono text-neon text-[11px] md:text-xs tracking-[.3em] uppercase mb-6">NTA-001 // Protocolo 001</p>
+          <h1 class="display hero-title mb-6">Entrena tu mente como un atleta de élite</h1>
+          <p class="text-white text-lg md:text-2xl font-light max-w-3xl mx-auto mb-10 leading-relaxed">
+            El primer sistema de entrenamiento cognitivo de alto rendimiento basado en evidencia.
+          </p>
+          <a href="#acceso" class="btn-out">Únete al acceso anticipado</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== BARRA INCLINADA ===================== -->
+    <div class="skew-bar" role="complementary">
+      <div class="md:flex items-center">
+        <div class="md:mr-6 mb-5 md:mb-0">
+          <strong class="block text-white font-bold">Acceso anticipado</strong>
+          <span class="text-white/90">Lista de espera abierta &mdash; cupos limitados</span>
+        </div>
+        <div class="md:ml-auto">
+          <a href="#acceso" class="btn-neon w-full md:w-auto">Aplicar al programa <span aria-hidden="true">›</span></a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===================== MANIFIESTO + CAPACIDADES ===================== -->
+    <section id="manifiesto" class="py-12 md:py-20">
+      <div class="max-w-6xl mx-auto px-5">
+        <div class="text-center max-w-3xl mx-auto mb-10 reveal">
+          <span class="sub block mb-3">El Manifiesto</span>
+          <h2 class="heading mb-6">El cuerpo se entrena.<br>La mente no.</h2>
+          <p class="text-base md:text-lg">
+            La sociedad moderna entrena el físico, pero deja la mente al azar. Vivimos con atrofia cognitiva por distracción crónica y sobrecarga informacional. No existe una cultura de &ldquo;Hoy toca entrenar la mente&rdquo;.
+          </p>
+        </div>
+
+        <!-- Carrusel -->
+        <div class="reveal">
+          <div id="capTrack" class="cap-track">
+
+            <article class="cap-card">
+              <svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="18"/><circle cx="32" cy="32" r="6"/><path d="M32 4v14M32 46v14M4 32h14M46 32h14"/></svg>
+              <h3 class="mt-6 text-white font-bold text-xl">Atención sostenida</h3>
+              <p class="mt-3 text-sm">Foco sostenido frente a la distracción crónica y la sobrecarga informacional.</p>
+            </article>
+
+            <article class="cap-card">
+              <svg viewBox="0 0 64 64" aria-hidden="true"><path d="M32 58V34M32 34L12 18v-8M32 34l20-16v-8"/><rect x="6" y="4" width="12" height="6"/><rect x="46" y="4" width="12" height="6"/></svg>
+              <h3 class="mt-6 text-white font-bold text-xl">Toma de decisiones</h3>
+              <p class="mt-3 text-sm">Decidir con claridad bajo presión, cuando el margen de error es mínimo.</p>
+            </article>
+
+            <article class="cap-card">
+              <svg viewBox="0 0 64 64" aria-hidden="true"><path d="M36 4L12 36h18l-4 24 26-34H34z"/></svg>
+              <h3 class="mt-6 text-white font-bold text-xl">Tiempo de reacción</h3>
+              <p class="mt-3 text-sm">Reflejos más rápidos frente a estímulos que cambian sin aviso.</p>
+            </article>
+
+            <article class="cap-card">
+              <svg viewBox="0 0 64 64" aria-hidden="true"><path d="M8 22h40M40 12l10 10-10 10M56 42H16M24 32L14 42l10 10"/></svg>
+              <h3 class="mt-6 text-white font-bold text-xl">Agilidad mental</h3>
+              <p class="mt-3 text-sm">Cambiar de contexto y reorganizar prioridades sin perder precisión.</p>
+            </article>
+
+            <article class="cap-card">
+              <svg viewBox="0 0 64 64" aria-hidden="true"><rect x="8" y="40" width="10" height="16"/><rect x="27" y="28" width="10" height="28"/><rect x="46" y="12" width="10" height="44"/></svg>
+              <h3 class="mt-6 text-white font-bold text-xl">Resistencia mental</h3>
+              <p class="mt-3 text-sm">Sostener el rendimiento cuando la fatiga cognitiva aparece.</p>
+            </article>
+
+            <article class="cap-card">
+              <svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="12" cy="14" r="6"/><circle cx="52" cy="14" r="6"/><circle cx="32" cy="52" r="6"/><path d="M17 17l10 28M47 17L37 45M18 14h28"/></svg>
+              <h3 class="mt-6 text-white font-bold text-xl">Integración cognitivo-motora</h3>
+              <p class="mt-3 text-sm">Conectar percepción, decisión y movimiento en una sola respuesta.</p>
+            </article>
+
+          </div>
+          <div id="capDots" class="text-center mt-4" role="tablist" aria-label="Capacidades"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== BANDA 1 ===================== -->
+    <div class="bgimg" style="background-image:url('hero.png')">
+      <div class="reveal">
+        <h2 class="display text-5xl md:text-7xl mb-5">No es meditación.<br>No es un juego.</h2>
+        <p class="text-white text-lg md:text-2xl font-light">Es sobrecarga cognitiva progresiva.</p>
+      </div>
+    </div>
+
+    <!-- ===================== LOS 3 FRENTES ===================== -->
+    <section id="frentes" class="py-14 md:py-24">
+      <div class="max-w-5xl mx-auto px-5">
+        <div class="text-center max-w-3xl mx-auto mb-12 reveal">
+          <span class="sub block mb-3">Los 3 Frentes</span>
+          <h2 class="heading mb-5">Tres arenas.<br>Un sistema.</h2>
+          <p>El mismo método cognitivo, adaptado a la presión de cada campo de rendimiento.</p>
+        </div>
+
+        <div class="space-y-7">
+          <article class="frente reveal" style="--accent:#0047FF; --on:#ffffff; --tag:#5C8AFF">
+            <div class="thumb"><img src="corporativo.jpg" alt="Frente corporativo"></div>
+            <div class="txt">
+              <span class="tag">Frente 01</span>
+              <h3>Corporativo</h3>
+              <p>Toma de decisiones bajo presión y agilidad mental para líderes.</p>
+            </div>
+          </article>
+
+          <article class="frente reveal" style="--accent:#D4FF00; --on:#000000; --tag:#D4FF00">
+            <div class="thumb"><img src="gamer.jpg" alt="Frente gaming"></div>
+            <div class="txt">
+              <span class="tag">Frente 02</span>
+              <h3>Gaming</h3>
+              <p>Reflejos, atención sostenida y tiempo de reacción para eSports.</p>
+            </div>
+          </article>
+
+          <article class="frente reveal" style="--accent:#FF0055; --on:#ffffff; --tag:#FF5C8E">
+            <div class="thumb"><img src="deporte.jpg" alt="Frente deporte"></div>
+            <div class="txt">
+              <span class="tag">Frente 03</span>
+              <h3>Deporte</h3>
+              <p>Integración cognitivo-motora y resistencia mental para atletas.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== BANDA 2 ===================== -->
+    <div class="bgimg" style="background-image:url('deporte.png')">
+      <div class="reveal">
+        <h2 class="display text-5xl md:text-7xl mb-5">Hoy toca<br><span class="text-neon">entrenar la mente.</span></h2>
+      </div>
+    </div>
+
+    <!-- ===================== PROTOCOLO ===================== -->
+    <section id="protocolo" class="py-14 md:py-24 bg-coal border-y border-line">
+      <div class="max-w-5xl mx-auto px-5">
+        <div class="text-center max-w-3xl mx-auto mb-12 reveal">
+          <span class="sub block mb-3">El Protocolo</span>
+          <h2 class="heading mb-5">El ciclo de adaptación</h2>
+          <p>Cinco fases. Se mide, se carga, se ajusta. Sin atajos.</p>
+        </div>
+
+        <div class="tabs reveal" role="tablist" aria-label="Fases del protocolo">
+          <button class="tab-btn" role="tab" id="t1" aria-controls="p1" aria-selected="true"><span>01</span><span class="hidden md:inline"> · Evaluación</span></button>
+          <button class="tab-btn" role="tab" id="t2" aria-controls="p2" aria-selected="false"><span>02</span><span class="hidden md:inline"> · Planificación</span></button>
+          <button class="tab-btn" role="tab" id="t3" aria-controls="p3" aria-selected="false"><span>03</span><span class="hidden md:inline"> · Entrenamiento</span></button>
+          <button class="tab-btn" role="tab" id="t4" aria-controls="p4" aria-selected="false"><span>04</span><span class="hidden md:inline"> · Registro</span></button>
+          <button class="tab-btn" role="tab" id="t5" aria-controls="p5" aria-selected="false"><span>05</span><span class="hidden md:inline"> · Reevaluación</span></button>
+        </div>
+
+        <div class="reveal border border-line bg-ink p-7 md:p-12">
+
+          <div class="panel" id="p1" role="tabpanel" aria-labelledby="t1" data-n="1">
+            <div class="grid md:grid-cols-12 gap-6 items-center">
+              <div class="md:col-span-4"><span class="bignum block">01</span></div>
+              <div class="md:col-span-8">
+                <span class="sub">Fase 01 // Evaluación</span>
+                <h3 class="display text-5xl md:text-7xl mt-3 mb-4">Evaluación</h3>
+                <p class="text-lg">Línea base cognitiva.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel" id="p2" role="tabpanel" aria-labelledby="t2" data-n="2" hidden>
+            <div class="grid md:grid-cols-12 gap-6 items-center">
+              <div class="md:col-span-4"><span class="bignum block">02</span></div>
+              <div class="md:col-span-8">
+                <span class="sub">Fase 02 // Planificación</span>
+                <h3 class="display text-5xl md:text-7xl mt-3 mb-4">Planificación</h3>
+                <p class="text-lg">Programa personalizado.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel" id="p3" role="tabpanel" aria-labelledby="t3" data-n="3" hidden>
+            <div class="grid md:grid-cols-12 gap-6 items-center">
+              <div class="md:col-span-4"><span class="bignum block">03</span></div>
+              <div class="md:col-span-8">
+                <span class="sub">Fase 03 // Entrenamiento</span>
+                <h3 class="display text-5xl md:text-7xl mt-3 mb-4">Entrenamiento</h3>
+                <p class="text-lg">Sesiones estructuradas.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel" id="p4" role="tabpanel" aria-labelledby="t4" data-n="4" hidden>
+            <div class="grid md:grid-cols-12 gap-6 items-center">
+              <div class="md:col-span-4"><span class="bignum block">04</span></div>
+              <div class="md:col-span-8">
+                <span class="sub">Fase 04 // Registro</span>
+                <h3 class="display text-5xl md:text-7xl mt-3 mb-4">Registro</h3>
+                <p class="text-lg">Métricas de progreso.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel" id="p5" role="tabpanel" aria-labelledby="t5" data-n="5" hidden>
+            <div class="grid md:grid-cols-12 gap-6 items-center">
+              <div class="md:col-span-4"><span class="bignum block">05</span></div>
+              <div class="md:col-span-8">
+                <span class="sub">Fase 05 // Reevaluación</span>
+                <h3 class="display text-5xl md:text-7xl mt-3 mb-4">Reevaluación</h3>
+                <p class="text-lg">Resultados y ajuste.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-10 flex items-center gap-6">
+            <div id="segs" class="flex gap-1.5 flex-1" aria-hidden="true">
+              <i class="seg"></i><i class="seg"></i><i class="seg"></i><i class="seg"></i><i class="seg"></i>
+            </div>
+            <button id="nextPhase" class="btn-neon">Siguiente fase <span aria-hidden="true">›</span></button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== EL NEUROATLETA ===================== -->
+    <section id="neuroatleta" class="py-14 md:py-24">
+      <div class="max-w-6xl mx-auto px-5">
+        <div class="text-center max-w-3xl mx-auto mb-12 reveal">
+          <span class="sub block mb-3">El Neuroatleta</span>
+          <h2 class="heading">No busca solo<br>conocimiento.</h2>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-6">
+          <div class="trait reveal" style="--c:#0047FF">
+            <span class="mono text-[11px] tracking-[.25em] uppercase" style="color:#5C8AFF">01 / Adaptación</span>
+            <h3 class="display text-4xl md:text-5xl mt-4">Busca<br>adaptación.</h3>
+          </div>
+          <div class="trait reveal" style="--c:#D4FF00">
+            <span class="mono text-[11px] tracking-[.25em] uppercase" style="color:#D4FF00">02 / Rendimiento</span>
+            <h3 class="display text-4xl md:text-5xl mt-4">Busca<br>rendimiento.</h3>
+          </div>
+          <div class="trait reveal" style="--c:#FF0055">
+            <span class="mono text-[11px] tracking-[.25em] uppercase" style="color:#FF5C8E">03 / Evolución</span>
+            <h3 class="display text-4xl md:text-5xl mt-4">Busca<br>evolución.</h3>
+          </div>
+        </div>
+
+        <p class="reveal text-center mt-16 display text-5xl md:text-7xl">
+          Mente entrenada.<br><span class="text-volt">No nacida.</span>
+        </p>
+      </div>
+    </section>
+
+    <!-- ===================== ACCESO / FORMULARIO ===================== -->
+    <section id="acceso" class="py-14 md:py-24 bg-coal border-t border-line pb-32">
+      <div class="max-w-6xl mx-auto px-5">
+        <div class="text-center max-w-3xl mx-auto mb-12 reveal">
+          <span class="sub block mb-3">Próximamente</span>
+          <h2 class="heading mb-5">Sé el primero en entrenar tu mente</h2>
+          <p>Únete a la lista de espera.</p>
+        </div>
+
+        <div class="max-w-2xl mx-auto reveal">
+          <form id="waitlist" novalidate>
+            <div class="grid md:grid-cols-2 gap-4 mb-4">
+              <div><label class="sr-only" for="fn">Nombre</label><input id="fn" class="field" type="text" placeholder="Nombre" autocomplete="given-name"></div>
+              <div><label class="sr-only" for="ln">Apellido</label><input id="ln" class="field" type="text" placeholder="Apellido" autocomplete="family-name"></div>
+            </div>
+            <div class="mb-4"><label class="sr-only" for="em">Correo electrónico</label><input id="em" class="field" type="email" placeholder="Correo electrónico" autocomplete="email" required></div>
+            <div class="mb-4">
+              <label class="sr-only" for="fr">Frente de interés</label>
+              <select id="fr" class="field">
+                <option value="">Frente de interés</option>
+                <option>Corporativo</option>
+                <option>Gaming</option>
+                <option>Deporte</option>
+              </select>
+            </div>
+            <div class="mb-6"><label class="sr-only" for="ms">Mensaje</label><textarea id="ms" rows="5" class="field" placeholder="Cuéntanos qué quieres entrenar (opcional)"></textarea></div>
+            <button type="submit" class="btn-volt w-full md:w-auto">Unirme a la lista de espera</button>
+            <p id="msg" class="mt-4 text-sm min-h-[1.4rem]" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== BARRA INCLINADA 2 ===================== -->
+    <div class="relative h-0">
+      <div class="skew-bar2">
+        <div class="md:flex items-center">
+          <div class="md:mr-6 mb-5 md:mb-0">
+            <strong class="block text-white font-bold">NEUROATLETISMO™</strong>
+            <span class="text-white/90">Entrenamiento cognitivo de alto rendimiento</span>
+          </div>
+          <div class="md:ml-auto">
+            <a href="#inicio" class="btn-neon w-full md:w-auto">Volver arriba <span aria-hidden="true">↑</span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="bg-ink pt-48 pb-10 border-t border-line">
+    <div class="max-w-6xl mx-auto px-5">
+      <div class="grid md:grid-cols-12 gap-10">
+        <div class="md:col-span-4">
+          <h3 class="text-white font-black uppercase text-sm tracking-[.12em] mb-5">Sobre NEUROATLETISMO</h3>
+          <p>Sistema de entrenamiento cognitivo de alto rendimiento basado en evidencia. Mente entrenada. No nacida.</p>
+        </div>
+        <div class="md:col-span-3 md:col-start-6">
+          <h3 class="text-white font-black uppercase text-sm tracking-[.12em] mb-5">Enlaces</h3>
+          <ul class="footer-links space-y-2">
+            <li><a href="#manifiesto">Manifiesto</a></li>
+            <li><a href="#frentes">Los 3 Frentes</a></li>
+            <li><a href="#protocolo">El Protocolo</a></li>
+            <li><a href="#neuroatleta">El Neuroatleta</a></li>
+          </ul>
+        </div>
+        <div class="md:col-span-4">
+          <h3 class="text-white font-black uppercase text-sm tracking-[.12em] mb-5">Lista de espera</h3>
+          <p class="mb-4">Recibe el aviso cuando abra el acceso.</p>
+          <form id="subscribe" class="flex" novalidate>
+            <label class="sr-only" for="sub-em">Correo electrónico</label>
+            <input id="sub-em" type="email" class="field" placeholder="tu@correo.com" required>
+            <button type="submit" class="btn-neon !px-5">Unirme</button>
+          </form>
+          <p id="submsg" class="mt-3 text-sm min-h-[1.4rem]" role="status" aria-live="polite"></p>
+        </div>
+      </div>
+
+      <div class="mt-16 pt-8 border-t border-line text-center">
+        <p class="mono text-[11px] tracking-[.18em] uppercase">&copy; 2026 NEUROATLETISMO™ // PARADIGMAX LABS</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var $ = function (s, c) { return (c || document).querySelector(s); };
+      var $$ = function (s, c) { return Array.prototype.slice.call((c || document).querySelectorAll(s)); };
+
+      // ---- Header shrink ----
+      var hdr = $('#hdr');
+      function onScroll() { hdr.classList.toggle('shrink', window.scrollY > 100); }
+      window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
+
+      // ---- Menú móvil ----
+      var mm = $('#mmenu'), ms = $('#mshade');
+      function toggleMenu(open) { mm.classList.toggle('open', open); ms.classList.toggle('open', open); }
+      $('#mopen').addEventListener('click', function () { toggleMenu(true); });
+      $('#mclose').addEventListener('click', function () { toggleMenu(false); });
+      ms.addEventListener('click', function () { toggleMenu(false); });
+      $$('.mlink').forEach(function (a) { a.addEventListener('click', function () { toggleMenu(false); }); });
+
+      // ---- Scrollspy ----
+      var links = $$('.nav-link');
+      var targets = links.map(function (a) { return $(a.getAttribute('href')); });
+      function spy() {
+        var y = window.scrollY + 160, cur = 0;
+        targets.forEach(function (t, i) { if (t && t.offsetTop <= y) cur = i; });
+        links.forEach(function (a, i) { a.classList.toggle('active', i === cur); });
+      }
+      window.addEventListener('scroll', spy, { passive: true }); spy();
+
+      // ---- Reveal on scroll ----
+      var rev = $$('.reveal');
+      if ('IntersectionObserver' in window) {
+        var io = new IntersectionObserver(function (es) {
+          es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+        }, { threshold: 0.12 });
+        rev.forEach(function (el) { io.observe(el); });
+      } else { rev.forEach(function (el) { el.classList.add('in'); }); }
+
+      // ---- Carrusel de capacidades ----
+      var track = $('#capTrack'), dotsBox = $('#capDots');
+      var cards = $$('.cap-card', track);
+      function perView() { return window.innerWidth >= 1024 ? 3 : (window.innerWidth >= 768 ? 2 : 1); }
+      function pages() { return Math.ceil(cards.length / perView()); }
+      function buildDots() {
+        dotsBox.innerHTML = '';
+        for (var i = 0; i < pages(); i++) {
+          (function (i) {
+            var b = document.createElement('button');
+            b.className = 'dot'; b.setAttribute('aria-label', 'Ir a la página ' + (i + 1));
+            b.addEventListener('click', function () {
+              var c = cards[Math.min(i * perView(), cards.length - 1)];
+              track.scrollTo({ left: c.offsetLeft - track.offsetLeft, behavior: 'smooth' });
+            });
+            dotsBox.appendChild(b);
+          })(i);
+        }
+        markDots();
+      }
+      function markDots() {
+        var w = cards[0].offsetWidth + 24;
+        var idx = Math.round(track.scrollLeft / w);
+        var maxScroll = track.scrollWidth - track.clientWidth;
+        var page = track.scrollLeft >= maxScroll - 4 ? pages() - 1 : Math.floor(idx / perView());
+        $$('.dot', dotsBox).forEach(function (d, i) { d.classList.toggle('on', i === page); });
+      }
+      track.addEventListener('scroll', markDots, { passive: true });
+      window.addEventListener('resize', buildDots);
+      buildDots();
+
+      // ---- Tabs del protocolo ----
+      var tabs = $$('.tab-btn'), panels = $$('.panel'), segs = $$('.seg');
+      var current = 0;
+      function showPhase(n) {
+        current = n;
+        tabs.forEach(function (t, i) { t.setAttribute('aria-selected', i === n ? 'true' : 'false'); });
+        panels.forEach(function (p, i) { p.hidden = i !== n; });
+        segs.forEach(function (s, i) { s.classList.toggle('on', i <= n); });
+      }
+      tabs.forEach(function (t, i) { t.addEventListener('click', function () { showPhase(i); }); });
+      $('#nextPhase').addEventListener('click', function () { showPhase((current + 1) % tabs.length); });
+      showPhase(0);
+
+      // ---- Formularios (sin backend: conecta tu servicio de email) ----
+      var ok = function (v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()); };
+      function wire(formSel, inputSel, msgSel, okText) {
+        var f = $(formSel), i = $(inputSel), m = $(msgSel);
+        f.addEventListener('submit', function (e) {
+          e.preventDefault();
+          if (!ok(i.value)) { m.textContent = 'Ingresa un correo válido.'; m.style.color = '#FF0055'; i.focus(); return; }
+          m.textContent = okText; m.style.color = '#D4FF00'; f.reset();
+        });
+      }
+      wire('#waitlist', '#em', '#msg', 'Estás dentro. Te avisaremos cuando abra el acceso.');
+      wire('#subscribe', '#sub-em', '#submsg', 'Listo. Te avisaremos.');
+    })();
+  </script>
 </body>
 </html>
