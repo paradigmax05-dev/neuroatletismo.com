@@ -37,14 +37,12 @@
     .display { font-family: 'Bebas Neue', Impact, sans-serif; font-style: italic; text-transform: uppercase; line-height: .9; color: #fff; }
     .mono { font-family: 'Space Mono', 'Courier New', monospace; }
 
-    /* ---------- Header (sticky + shrink, como Stamina) ---------- */
     #hdr { padding: 1.5rem 0; transition: padding .3s ease, background-color .3s ease, border-color .3s ease; border-bottom: 1px solid transparent; }
     #hdr.shrink { padding: .6rem 0; background: rgba(0,0,0,.85); backdrop-filter: blur(10px); border-bottom-color: #222; }
     .nav-link { display: inline-block; padding: 5px 18px; color: #fff; font-size: 14px; border-bottom: 2px solid transparent; transition: border-color .25s, color .25s; }
     .nav-link:hover { color: #D4FF00; }
     .nav-link.active { border-bottom-color: #D4FF00; }
 
-    /* ---------- Botones ---------- */
     .btn-out { display: inline-block; border: 2px solid #fff; color: #fff; text-transform: uppercase; font-weight: 900; font-size: 12px; letter-spacing: .12em; padding: 1rem 2.5rem; transition: all .25s ease; }
     .btn-out:hover { background: #fff; color: #000; }
     .btn-neon { display: inline-flex; align-items: center; justify-content: center; gap: .5rem; background: #D4FF00; border: 2px solid #D4FF00; color: #000; text-transform: uppercase; font-weight: 900; font-size: 12px; letter-spacing: .12em; padding: .8rem 1.4rem; transition: all .25s ease; cursor: pointer; }
@@ -52,24 +50,20 @@
     .btn-volt { display: inline-block; background: #0047FF; border: 2px solid #0047FF; color: #fff; text-transform: uppercase; font-weight: 900; font-size: 12px; letter-spacing: .12em; padding: 1rem 2.5rem; transition: all .25s ease; cursor: pointer; }
     .btn-volt:hover { background: transparent; color: #0047FF; }
 
-    /* ---------- Hero ---------- */
     .hero { position: relative; height: 100vh; min-height: 760px; background: #111 center/cover no-repeat; }
     .hero::after { content: ""; position: absolute; inset: 0; background: rgba(0,0,0,.58); z-index: 1; }
     .hero > .wrap { position: relative; z-index: 10; height: 100%; }
     .hero-title { font-size: clamp(3.6rem, 10.5vw, 10rem); }
 
-    /* ---------- Barra inclinada (schedule-wrap) ---------- */
     .skew-bar { position: relative; z-index: 9; background: #0047FF; color: #fff; padding: 2.5rem; max-width: 700px; transform: translateY(-50%); }
     .skew-bar::before { content: ""; position: absolute; inset: 0; background: inherit; z-index: -1; transform-origin: bottom left; transform: skew(-12deg); }
     .skew-bar2 { position: absolute; z-index: 9; right: 0; background: #0047FF; color: #fff; padding: 2.5rem; width: 90%; transform: translateY(-50%); }
     @media (min-width: 768px) { .skew-bar2 { width: 50%; } }
     .skew-bar2::before { content: ""; position: absolute; inset: 0; background: inherit; z-index: -1; transform-origin: bottom right; transform: skew(12deg); }
 
-    /* ---------- Encabezados de sección ---------- */
     .sub { font-family: 'Space Mono', monospace; font-size: .8rem; letter-spacing: .3em; text-transform: uppercase; color: #D4FF00; }
     .heading { font-family: 'Bebas Neue', Impact, sans-serif; font-style: italic; text-transform: uppercase; color: #fff; font-size: clamp(3rem, 7vw, 6rem); line-height: .92; }
 
-    /* ---------- Capacidades (carrusel) ---------- */
     .cap-track { display: flex; gap: 1.5rem; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding: 2rem 2px; }
     .cap-track::-webkit-scrollbar { display: none; }
     .cap-card { flex: 0 0 86%; scroll-snap-align: start; text-align: center; padding: 2.2rem 1.5rem; background: #111; border: 1px solid #222; transition: box-shadow .3s ease, border-color .3s ease, transform .3s ease; }
@@ -81,13 +75,11 @@
     .dot { width: 10px; height: 10px; background: #333; display: inline-block; margin: 5px; border: 0; cursor: pointer; transition: background .2s; }
     .dot.on { background: #D4FF00; }
 
-    /* ---------- Bandas parallax ---------- */
     .bgimg { position: relative; height: 500px; background: #111 center/cover no-repeat; background-attachment: fixed; display: flex; align-items: center; justify-content: center; text-align: center; padding: 0 1.25rem; }
     .bgimg::before { content: ""; position: absolute; inset: 0; background: rgba(0,0,0,.6); }
     .bgimg > div { position: relative; z-index: 2; max-width: 56rem; }
     @media (max-width: 1023px) { .bgimg { background-attachment: scroll; height: 420px; } }
 
-    /* ---------- Frentes (class-item) ---------- */
     .frente { display: flex; align-items: stretch; background: #111; border: 1px solid #222; overflow: hidden; position: relative; z-index: 1; transition: transform .3s ease, background-color .3s ease, color .3s ease, box-shadow .3s ease; color: var(--on); }
     .frente .thumb { flex: 0 0 120px; overflow: hidden; background: #000; }
     @media (min-width: 768px) { .frente .thumb { flex-basis: 220px; } }
@@ -101,7 +93,6 @@
     .frente:hover p { color: var(--on); }
     .frente:hover .thumb img { filter: grayscale(0); transform: scale(1.06); }
 
-    /* ---------- Protocolo (tabs) ---------- */
     .tabs { display: grid; grid-template-columns: repeat(5, 1fr); margin-bottom: 3rem; }
     .tab-btn { background: #111; color: #A1A1AA; padding: 14px 6px; text-align: center; font-family: 'Space Mono', monospace; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; border: 0; border-right: 1px solid #050505; cursor: pointer; transition: background .2s, color .2s; }
     .tab-btn:hover { color: #fff; background: #1b1b1b; }
@@ -113,11 +104,9 @@
     .seg { height: 4px; flex: 1; background: #222; transition: background .3s; }
     .seg.on { background: #D4FF00; }
 
-    /* ---------- Neuroatleta (ftco-feature) ---------- */
     .trait { background: #111; border: 1px solid #222; padding: 2.5rem 2rem; text-align: left; transition: box-shadow .3s, transform .3s, border-color .3s; border-top: 4px solid var(--c); }
     .trait:hover { transform: translateY(-6px); box-shadow: 0 20px 50px -20px var(--c); border-color: var(--c); }
 
-    /* ---------- Formularios ---------- */
     .field { width: 100%; height: 52px; background: #050505; border: 2px solid #222; color: #fff; padding: 0 1rem; font-family: 'Inter', sans-serif; font-weight: 400; transition: border-color .2s; }
     textarea.field { height: auto; padding: 1rem; }
     .field:focus { outline: none; border-color: #D4FF00; }
@@ -127,11 +116,9 @@
     .footer-links a { transition: color .2s; }
     .footer-links a:hover { color: #D4FF00; }
 
-    /* ---------- Reveal (AOS) ---------- */
     html.js .reveal { opacity: 0; transform: translateY(26px); transition: opacity .8s ease, transform .8s ease; }
     html.js .reveal.in { opacity: 1; transform: none; }
 
-    /* ---------- Menú móvil (offcanvas) ---------- */
     #mmenu { position: fixed; top: 0; right: 0; bottom: 0; width: min(82vw, 340px); background: #050505; border-left: 1px solid #222; z-index: 2500; transform: translateX(100%); visibility: hidden; transition: transform .35s ease, visibility .35s; padding: 2rem; }
     #mmenu.open { transform: none; visibility: visible; }
     #mshade { position: fixed; inset: 0; background: rgba(0,0,0,.65); z-index: 2400; opacity: 0; visibility: hidden; transition: opacity .3s; }
@@ -147,7 +134,6 @@
 
 <body>
 
-  <!-- ===================== MENÚ MÓVIL ===================== -->
   <div id="mshade"></div>
   <aside id="mmenu" aria-label="Menú">
     <button id="mclose" class="mono text-white text-xs tracking-[.25em] uppercase mb-10" aria-label="Cerrar menú">[ Cerrar × ]</button>
@@ -161,11 +147,11 @@
     </ul>
   </aside>
 
-  <!-- ===================== HEADER ===================== -->
   <header id="hdr" class="fixed top-0 inset-x-0 z-[2000]" role="banner">
     <div class="px-5 md:px-12 lg:px-28 flex items-center">
-      <a href="#inicio" class="text-white font-black text-lg md:text-xl uppercase tracking-tight">
-        NEUROATLETISMO<span class="text-neon">.</span><sup class="text-[10px] text-mute font-normal ml-0.5">™</sup>
+      <a href="#inicio" class="flex items-center">
+        <!-- LOGO AQUI -->
+        <img src="logo.png" alt="NEUROATLETISMO Logo" class="h-8 md:h-10 w-auto">
       </a>
       <nav class="ml-auto hidden lg:block" aria-label="Principal">
         <ul class="flex">
@@ -183,11 +169,11 @@
 
   <main>
 
-    <!-- ===================== HERO ===================== -->
-    <section id="inicio" class="hero" style="background-image:url('hero.png')">
+    <!-- HERO -->
+    <section id="inicio" class="hero" style="background-image:url('héroe.png')">
       <div class="wrap px-5 pt-24 pb-36 flex items-center justify-center text-center">
         <div class="max-w-5xl reveal in">
-          <p class="mono text-neon text-[11px] md:text-xs tracking-[.3em] uppercase mb-6">NTA-001 // Protocolo 001</p>
+          <!-- NTA-001 ELIMINADO -->
           <h1 class="display hero-title mb-6">Entrena tu mente como un atleta de élite</h1>
           <p class="text-white text-lg md:text-2xl font-light max-w-3xl mx-auto mb-10 leading-relaxed">
             El primer sistema de entrenamiento cognitivo de alto rendimiento basado en evidencia.
@@ -197,7 +183,6 @@
       </div>
     </section>
 
-    <!-- ===================== BARRA INCLINADA ===================== -->
     <div class="skew-bar" role="complementary">
       <div class="md:flex items-center">
         <div class="md:mr-6 mb-5 md:mb-0">
@@ -210,7 +195,7 @@
       </div>
     </div>
 
-    <!-- ===================== MANIFIESTO + CAPACIDADES ===================== -->
+    <!-- MANIFIESTO -->
     <section id="manifiesto" class="py-12 md:py-20">
       <div class="max-w-6xl mx-auto px-5">
         <div class="text-center max-w-3xl mx-auto mb-10 reveal">
@@ -221,61 +206,52 @@
           </p>
         </div>
 
-        <!-- Carrusel -->
         <div class="reveal">
           <div id="capTrack" class="cap-track">
-
             <article class="cap-card">
               <svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="18"/><circle cx="32" cy="32" r="6"/><path d="M32 4v14M32 46v14M4 32h14M46 32h14"/></svg>
               <h3 class="mt-6 text-white font-bold text-xl">Atención sostenida</h3>
               <p class="mt-3 text-sm">Foco sostenido frente a la distracción crónica y la sobrecarga informacional.</p>
             </article>
-
             <article class="cap-card">
               <svg viewBox="0 0 64 64" aria-hidden="true"><path d="M32 58V34M32 34L12 18v-8M32 34l20-16v-8"/><rect x="6" y="4" width="12" height="6"/><rect x="46" y="4" width="12" height="6"/></svg>
               <h3 class="mt-6 text-white font-bold text-xl">Toma de decisiones</h3>
               <p class="mt-3 text-sm">Decidir con claridad bajo presión, cuando el margen de error es mínimo.</p>
             </article>
-
             <article class="cap-card">
               <svg viewBox="0 0 64 64" aria-hidden="true"><path d="M36 4L12 36h18l-4 24 26-34H34z"/></svg>
               <h3 class="mt-6 text-white font-bold text-xl">Tiempo de reacción</h3>
               <p class="mt-3 text-sm">Reflejos más rápidos frente a estímulos que cambian sin aviso.</p>
             </article>
-
             <article class="cap-card">
               <svg viewBox="0 0 64 64" aria-hidden="true"><path d="M8 22h40M40 12l10 10-10 10M56 42H16M24 32L14 42l10 10"/></svg>
               <h3 class="mt-6 text-white font-bold text-xl">Agilidad mental</h3>
               <p class="mt-3 text-sm">Cambiar de contexto y reorganizar prioridades sin perder precisión.</p>
             </article>
-
             <article class="cap-card">
               <svg viewBox="0 0 64 64" aria-hidden="true"><rect x="8" y="40" width="10" height="16"/><rect x="27" y="28" width="10" height="28"/><rect x="46" y="12" width="10" height="44"/></svg>
               <h3 class="mt-6 text-white font-bold text-xl">Resistencia mental</h3>
               <p class="mt-3 text-sm">Sostener el rendimiento cuando la fatiga cognitiva aparece.</p>
             </article>
-
             <article class="cap-card">
               <svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="12" cy="14" r="6"/><circle cx="52" cy="14" r="6"/><circle cx="32" cy="52" r="6"/><path d="M17 17l10 28M47 17L37 45M18 14h28"/></svg>
               <h3 class="mt-6 text-white font-bold text-xl">Integración cognitivo-motora</h3>
               <p class="mt-3 text-sm">Conectar percepción, decisión y movimiento en una sola respuesta.</p>
             </article>
-
           </div>
           <div id="capDots" class="text-center mt-4" role="tablist" aria-label="Capacidades"></div>
         </div>
       </div>
     </section>
 
-    <!-- ===================== BANDA 1 ===================== -->
-    <div class="bgimg" style="background-image:url('hero.png')">
+    <div class="bgimg" style="background-image:url('héroe.png')">
       <div class="reveal">
         <h2 class="display text-5xl md:text-7xl mb-5">No es meditación.<br>No es un juego.</h2>
         <p class="text-white text-lg md:text-2xl font-light">Es sobrecarga cognitiva progresiva.</p>
       </div>
     </div>
 
-    <!-- ===================== LOS 3 FRENTES ===================== -->
+    <!-- FRENTES -->
     <section id="frentes" class="py-14 md:py-24">
       <div class="max-w-5xl mx-auto px-5">
         <div class="text-center max-w-3xl mx-auto mb-12 reveal">
@@ -286,7 +262,7 @@
 
         <div class="space-y-7">
           <article class="frente reveal" style="--accent:#0047FF; --on:#ffffff; --tag:#5C8AFF">
-            <div class="thumb"><img src="corporativo.jpg" alt="Frente corporativo"></div>
+            <div class="thumb"><img src="corporativo.png" alt="Frente corporativo"></div>
             <div class="txt">
               <span class="tag">Frente 01</span>
               <h3>Corporativo</h3>
@@ -295,7 +271,7 @@
           </article>
 
           <article class="frente reveal" style="--accent:#D4FF00; --on:#000000; --tag:#D4FF00">
-            <div class="thumb"><img src="gamer.jpg" alt="Frente gaming"></div>
+            <div class="thumb"><img src="jugador.png" alt="Frente gaming"></div>
             <div class="txt">
               <span class="tag">Frente 02</span>
               <h3>Gaming</h3>
@@ -304,7 +280,7 @@
           </article>
 
           <article class="frente reveal" style="--accent:#FF0055; --on:#ffffff; --tag:#FF5C8E">
-            <div class="thumb"><img src="deporte.jpg" alt="Frente deporte"></div>
+            <div class="thumb"><img src="héroe.png" alt="Frente deporte"></div>
             <div class="txt">
               <span class="tag">Frente 03</span>
               <h3>Deporte</h3>
@@ -315,14 +291,13 @@
       </div>
     </section>
 
-    <!-- ===================== BANDA 2 ===================== -->
-    <div class="bgimg" style="background-image:url('deporte.png')">
+    <div class="bgimg" style="background-image:url('jugador.png')">
       <div class="reveal">
         <h2 class="display text-5xl md:text-7xl mb-5">Hoy toca<br><span class="text-neon">entrenar la mente.</span></h2>
       </div>
     </div>
 
-    <!-- ===================== PROTOCOLO ===================== -->
+    <!-- PROTOCOLO -->
     <section id="protocolo" class="py-14 md:py-24 bg-coal border-y border-line">
       <div class="max-w-5xl mx-auto px-5">
         <div class="text-center max-w-3xl mx-auto mb-12 reveal">
@@ -340,7 +315,6 @@
         </div>
 
         <div class="reveal border border-line bg-ink p-7 md:p-12">
-
           <div class="panel" id="p1" role="tabpanel" aria-labelledby="t1" data-n="1">
             <div class="grid md:grid-cols-12 gap-6 items-center">
               <div class="md:col-span-4"><span class="bignum block">01</span></div>
@@ -351,7 +325,6 @@
               </div>
             </div>
           </div>
-
           <div class="panel" id="p2" role="tabpanel" aria-labelledby="t2" data-n="2" hidden>
             <div class="grid md:grid-cols-12 gap-6 items-center">
               <div class="md:col-span-4"><span class="bignum block">02</span></div>
@@ -362,7 +335,6 @@
               </div>
             </div>
           </div>
-
           <div class="panel" id="p3" role="tabpanel" aria-labelledby="t3" data-n="3" hidden>
             <div class="grid md:grid-cols-12 gap-6 items-center">
               <div class="md:col-span-4"><span class="bignum block">03</span></div>
@@ -373,7 +345,6 @@
               </div>
             </div>
           </div>
-
           <div class="panel" id="p4" role="tabpanel" aria-labelledby="t4" data-n="4" hidden>
             <div class="grid md:grid-cols-12 gap-6 items-center">
               <div class="md:col-span-4"><span class="bignum block">04</span></div>
@@ -384,7 +355,6 @@
               </div>
             </div>
           </div>
-
           <div class="panel" id="p5" role="tabpanel" aria-labelledby="t5" data-n="5" hidden>
             <div class="grid md:grid-cols-12 gap-6 items-center">
               <div class="md:col-span-4"><span class="bignum block">05</span></div>
@@ -395,7 +365,6 @@
               </div>
             </div>
           </div>
-
           <div class="mt-10 flex items-center gap-6">
             <div id="segs" class="flex gap-1.5 flex-1" aria-hidden="true">
               <i class="seg"></i><i class="seg"></i><i class="seg"></i><i class="seg"></i><i class="seg"></i>
@@ -406,14 +375,12 @@
       </div>
     </section>
 
-    <!-- ===================== EL NEUROATLETA ===================== -->
     <section id="neuroatleta" class="py-14 md:py-24">
       <div class="max-w-6xl mx-auto px-5">
         <div class="text-center max-w-3xl mx-auto mb-12 reveal">
           <span class="sub block mb-3">El Neuroatleta</span>
           <h2 class="heading">No busca solo<br>conocimiento.</h2>
         </div>
-
         <div class="grid md:grid-cols-3 gap-6">
           <div class="trait reveal" style="--c:#0047FF">
             <span class="mono text-[11px] tracking-[.25em] uppercase" style="color:#5C8AFF">01 / Adaptación</span>
@@ -428,14 +395,13 @@
             <h3 class="display text-4xl md:text-5xl mt-4">Busca<br>evolución.</h3>
           </div>
         </div>
-
         <p class="reveal text-center mt-16 display text-5xl md:text-7xl">
           Mente entrenada.<br><span class="text-volt">No nacida.</span>
         </p>
       </div>
     </section>
 
-    <!-- ===================== ACCESO / FORMULARIO ===================== -->
+    <!-- ACCESO -->
     <section id="acceso" class="py-14 md:py-24 bg-coal border-t border-line pb-32">
       <div class="max-w-6xl mx-auto px-5">
         <div class="text-center max-w-3xl mx-auto mb-12 reveal">
@@ -443,7 +409,6 @@
           <h2 class="heading mb-5">Sé el primero en entrenar tu mente</h2>
           <p>Únete a la lista de espera.</p>
         </div>
-
         <div class="max-w-2xl mx-auto reveal">
           <form id="waitlist" novalidate>
             <div class="grid md:grid-cols-2 gap-4 mb-4">
@@ -468,7 +433,6 @@
       </div>
     </section>
 
-    <!-- ===================== BARRA INCLINADA 2 ===================== -->
     <div class="relative h-0">
       <div class="skew-bar2">
         <div class="md:flex items-center">
@@ -485,7 +449,6 @@
 
   </main>
 
-  <!-- ===================== FOOTER ===================== -->
   <footer class="bg-ink pt-48 pb-10 border-t border-line">
     <div class="max-w-6xl mx-auto px-5">
       <div class="grid md:grid-cols-12 gap-10">
@@ -513,7 +476,6 @@
           <p id="submsg" class="mt-3 text-sm min-h-[1.4rem]" role="status" aria-live="polite"></p>
         </div>
       </div>
-
       <div class="mt-16 pt-8 border-t border-line text-center">
         <p class="mono text-[11px] tracking-[.18em] uppercase">&copy; 2026 NEUROATLETISMO™ // PARADIGMAX LABS</p>
       </div>
@@ -524,21 +486,15 @@
     (function () {
       var $ = function (s, c) { return (c || document).querySelector(s); };
       var $$ = function (s, c) { return Array.prototype.slice.call((c || document).querySelectorAll(s)); };
-
-      // ---- Header shrink ----
       var hdr = $('#hdr');
       function onScroll() { hdr.classList.toggle('shrink', window.scrollY > 100); }
       window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
-
-      // ---- Menú móvil ----
       var mm = $('#mmenu'), ms = $('#mshade');
       function toggleMenu(open) { mm.classList.toggle('open', open); ms.classList.toggle('open', open); }
       $('#mopen').addEventListener('click', function () { toggleMenu(true); });
       $('#mclose').addEventListener('click', function () { toggleMenu(false); });
       ms.addEventListener('click', function () { toggleMenu(false); });
       $$('.mlink').forEach(function (a) { a.addEventListener('click', function () { toggleMenu(false); }); });
-
-      // ---- Scrollspy ----
       var links = $$('.nav-link');
       var targets = links.map(function (a) { return $(a.getAttribute('href')); });
       function spy() {
@@ -547,8 +503,6 @@
         links.forEach(function (a, i) { a.classList.toggle('active', i === cur); });
       }
       window.addEventListener('scroll', spy, { passive: true }); spy();
-
-      // ---- Reveal on scroll ----
       var rev = $$('.reveal');
       if ('IntersectionObserver' in window) {
         var io = new IntersectionObserver(function (es) {
@@ -556,8 +510,6 @@
         }, { threshold: 0.12 });
         rev.forEach(function (el) { io.observe(el); });
       } else { rev.forEach(function (el) { el.classList.add('in'); }); }
-
-      // ---- Carrusel de capacidades ----
       var track = $('#capTrack'), dotsBox = $('#capDots');
       var cards = $$('.cap-card', track);
       function perView() { return window.innerWidth >= 1024 ? 3 : (window.innerWidth >= 768 ? 2 : 1); }
@@ -587,8 +539,6 @@
       track.addEventListener('scroll', markDots, { passive: true });
       window.addEventListener('resize', buildDots);
       buildDots();
-
-      // ---- Tabs del protocolo ----
       var tabs = $$('.tab-btn'), panels = $$('.panel'), segs = $$('.seg');
       var current = 0;
       function showPhase(n) {
@@ -600,8 +550,6 @@
       tabs.forEach(function (t, i) { t.addEventListener('click', function () { showPhase(i); }); });
       $('#nextPhase').addEventListener('click', function () { showPhase((current + 1) % tabs.length); });
       showPhase(0);
-
-      // ---- Formularios (sin backend: conecta tu servicio de email) ----
       var ok = function (v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()); };
       function wire(formSel, inputSel, msgSel, okText) {
         var f = $(formSel), i = $(inputSel), m = $(msgSel);
