@@ -421,9 +421,9 @@
         </div>
 
         <!-- Botón de postulación -->
-        <a href="#contacto-certificacion" class="btn-neon inline-flex items-center">
-          Iniciar postulación <span class="ml-2">→</span>
-        </a>
+        <a href="#contacto" class="btn-neon inline-flex items-center">
+      Iniciar postulación <span class="ml-2">→</span>
+      </a>
       </div>
 
       <!-- Tarjeta visual de la certificación -->
@@ -1352,53 +1352,62 @@
       </div>
     </section>
 
-    <!-- ACCESO -->
-    <section id="acceso" class="py-14 md:py-24 bg-coal border-t border-line pb-32">
-      <div class="max-w-6xl mx-auto px-5">
-        <div class="text-center max-w-3xl mx-auto mb-12 reveal">
-          <span class="sub block mb-3">Próximamente</span>
-          <h2 class="heading mb-5">Sé el primero en entrenar tu mente</h2>
-          <p>Únete a la lista de espera.</p>
+   <!-- ===================== CONTACTO Y ADMISIÓN ===================== -->
+<section id="contacto" class="py-14 md:py-24 bg-[#080808] border-t border-line">
+  <div class="max-w-6xl mx-auto px-5">
+    <div class="grid md:grid-cols-2 gap-12 md:gap-20">
+      
+      <!-- Texto -->
+      <div class="reveal flex flex-col justify-center">
+        <span class="sub block mb-3">Admisiones Abiertas</span>
+        <h2 class="heading mb-6">Da el siguiente paso<br>en tu rendimiento.</h2>
+        <p class="text-base md:text-lg mb-8 text-white/80 leading-relaxed">
+          Ya sea que busques preparación individual, un programa para tu equipo o certificarte como profesional, nuestro equipo evaluará tu caso para recomendarte el mejor camino.
+        </p>
+        <div class="border border-line p-6 bg-ink">
+          <p class="mono text-xs text-mute mb-2">CONTACTO DIRECTO</p>
+          <a href="mailto:contacto@neuroatletismo.com" class="text-white hover:text-volt transition-colors font-semibold">
+            contacto@neuroatletismo.com
+          </a>
         </div>
-        <div class="max-w-2xl mx-auto reveal">
-          <form id="waitlist" novalidate>
-            <div class="grid md:grid-cols-2 gap-4 mb-4">
-              <div><label class="sr-only" for="fn">Nombre</label><input id="fn" class="field" type="text" placeholder="Nombre" autocomplete="given-name"></div>
-              <div><label class="sr-only" for="ln">Apellido</label><input id="ln" class="field" type="text" placeholder="Apellido" autocomplete="family-name"></div>
+      </div>
+
+      <!-- Formulario -->
+      <div class="reveal">
+        <div class="bg-ink border border-line p-8 md:p-10">
+          <h3 class="text-2xl font-black uppercase text-white mb-2">Solicitar Admisión</h3>
+          <p class="text-sm text-mute mb-8">Completa el formulario y nos pondremos en contacto.</p>
+
+          <form id="neuro-form" action="https://formspree.io/f/mnpjkvbe" method="POST" class="space-y-5">
+            <div>
+              <label for="nombre" class="block text-xs font-mono text-mute mb-2 uppercase tracking-widest">Nombre Completo</label>
+              <input type="text" name="nombre" id="nombre" required class="w-full bg-[#050505] border border-line p-3 text-white focus:outline-none focus:border-volt transition-colors">
             </div>
-            <div class="mb-4"><label class="sr-only" for="em">Correo electrónico</label><input id="em" class="field" type="email" placeholder="Correo electrónico" autocomplete="email" required></div>
-            <div class="mb-4">
-              <label class="sr-only" for="fr">Frente de interés</label>
-              <select id="fr" class="field">
-                <option value="">Frente de interés</option>
-                <option>Corporativo</option>
-                <option>Gaming</option>
-                <option>Deporte</option>
+            <div>
+              <label for="email" class="block text-xs font-mono text-mute mb-2 uppercase tracking-widest">Correo Electrónico</label>
+              <input type="email" name="email" id="email" required class="w-full bg-[#050505] border border-line p-3 text-white focus:outline-none focus:border-volt transition-colors">
+            </div>
+            <div>
+              <label for="perfil" class="block text-xs font-mono text-mute mb-2 uppercase tracking-widest">¿Cuál es tu perfil?</label>
+              <select name="perfil" id="perfil" required class="w-full bg-[#050505] border border-line p-3 text-white focus:outline-none focus:border-volt transition-colors appearance-none">
+                <option value="" disabled selected>Selecciona una opción</option>
+                <option value="atleta">Atleta / Ejecutivo / Gamer</option>
+                <option value="equipo">Representante de Empresa o Equipo</option>
+                <option value="profesional">Profesional de la Salud / Deporte</option>
               </select>
             </div>
-            <div class="mb-6"><label class="sr-only" for="ms">Mensaje</label><textarea id="ms" rows="5" class="field" placeholder="Cuéntanos qué quieres entrenar (opcional)"></textarea></div>
-            <button type="submit" class="btn-volt w-full md:w-auto">Unirme a la lista de espera</button>
-            <p id="msg" class="mt-4 text-sm min-h-[1.4rem]" role="status" aria-live="polite"></p>
+            <div>
+              <label for="mensaje" class="block text-xs font-mono text-mute mb-2 uppercase tracking-widest">Mensaje (Opcional)</label>
+              <textarea name="mensaje" id="mensaje" rows="4" class="w-full bg-[#050505] border border-line p-3 text-white focus:outline-none focus:border-volt transition-colors resize-none"></textarea>
+            </div>
+            <button type="submit" class="btn-neon w-full py-4 text-sm mt-2">Enviar Solicitud</button>
           </form>
         </div>
       </div>
-    </section>
-
-    <div class="relative h-0">
-      <div class="skew-bar2">
-        <div class="md:flex items-center">
-          <div class="md:mr-6 mb-5 md:mb-0">
-            <strong class="block text-white font-bold">NEUROATLETISMO™</strong>
-            <span class="text-white/90">Entrenamiento cognitivo de alto rendimiento</span>
-          </div>
-          <div class="md:ml-auto">
-            <a href="#inicio" class="btn-neon w-full md:w-auto">Volver arriba <span aria-hidden="true">↑</span></a>
-          </div>
-        </div>
-      </div>
     </div>
-
-  </main>
+  </div>
+</section>
+<!-- ===================== FIN CONTACTO ===================== -->
 
   <footer class="bg-ink pt-48 pb-10 border-t border-line">
     <div class="max-w-6xl mx-auto px-5">
@@ -1514,5 +1523,48 @@
       wire('#subscribe', '#sub-em', '#submsg', 'Listo. Te avisaremos.');
     })();
   </script>
+    <script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const form = document.getElementById("neuro-form");
+    if (!form) return;
+
+    form.addEventListener("submit", async function(event) {
+      event.preventDefault();
+      const submitBtn = form.querySelector('button[type="submit"]');
+      const originalText = submitBtn.innerHTML;
+
+      submitBtn.innerHTML = "Enviando...";
+      submitBtn.disabled = true;
+
+      const data = new FormData(form);
+
+      try {
+        const response = await fetch(form.action, {
+          method: form.method,
+          body: data,
+          headers: { 'Accept': 'application/json' }
+        });
+
+        if (response.ok) {
+          form.innerHTML = `
+            <div class="text-center py-12 border border-volt bg-volt/5">
+              <span class="text-4xl block mb-4">✓</span>
+              <h3 class="text-2xl font-black uppercase text-volt mb-2">Solicitud Recibida</h3>
+              <p class="text-white/70 text-sm">Nuestro equipo evaluará tu perfil y te contactará en menos de 24 horas.</p>
+            </div>
+          `;
+        } else {
+          alert("Hubo un error. Inténtalo de nuevo.");
+          submitBtn.innerHTML = originalText;
+          submitBtn.disabled = false;
+        }
+      } catch (error) {
+        alert("Error de conexión. Revisa tu internet.");
+        submitBtn.innerHTML = originalText;
+        submitBtn.disabled = false;
+      }
+    });
+  });
+</script>
 </body>
 </html>
