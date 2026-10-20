@@ -302,24 +302,24 @@
 <section id="test" class="py-14 md:py-24 bg-ink border-y border-line">
   <div class="max-w-5xl mx-auto px-5">
     <div class="text-center max-w-3xl mx-auto mb-12 reveal">
-      <span class="sub block mb-3">[ MÓDULO DE EVALUACIÓN // LÍNEA BASE ]</span>
+      <span class="sub block mb-3">[ MÓDULO DE EVALUACIÓN ]</span>
       <h2 class="heading mb-5">Test de Tiempo de Reacción</h2>
-      <p>Mide tu latencia de procesamiento. El promedio de un atleta de élite es de 250 ms.</p>
+      <p>Mide tu latencia de procesamiento. ¿Tienes los reflejos de un atleta de élite?</p>
     </div>
 
-    <!-- Interfaz tipo Consola / Dashboard -->
+    <!-- Interfaz de la Consola -->
     <div class="bg-coal border border-line p-6 md:p-10 relative">
       
-      <!-- Barra superior tipo Sistema -->
+      <!-- Barra superior -->
       <div class="flex justify-between items-center border-b border-line pb-4 mb-8">
-        <div class="mono text-xs text-mute tracking-widest">SYS.READY // NTA-REACTION-TEST</div>
-        <div class="mono text-xs text-neon tracking-widest" id="test-status">STATUS: IDLE</div>
+        <div class="mono text-xs text-mute tracking-widest uppercase">Evaluación de Línea Base</div>
+        <div class="mono text-xs text-neon tracking-widest uppercase" id="test-status">Estado: Listo para iniciar</div>
       </div>
 
       <!-- Pantalla Principal -->
       <div class="grid md:grid-cols-3 gap-8 items-center">
         
-        <!-- Panel Izquierdo: Instrucciones / Series -->
+        <!-- Panel Izquierdo -->
         <div class="md:col-span-1 space-y-4">
           <div class="border border-line p-4 bg-ink">
             <span class="mono text-[10px] text-mute uppercase tracking-widest block mb-1">Protocolo</span>
@@ -328,29 +328,30 @@
           <div class="border border-line p-4 bg-ink">
             <span class="mono text-[10px] text-mute uppercase tracking-widest block mb-1">Progreso</span>
             <div class="flex space-x-2 mt-2" id="progress-dots">
-              <div class="w-3 h-3 bg-line rounded-full"></div>
-              <div class="w-3 h-3 bg-line rounded-full"></div>
-              <div class="w-3 h-3 bg-line rounded-full"></div>
+              <div class="w-3 h-3 bg-line rounded-full transition-colors duration-300"></div>
+              <div class="w-3 h-3 bg-line rounded-full transition-colors duration-300"></div>
+              <div class="w-3 h-3 bg-line rounded-full transition-colors duration-300"></div>
             </div>
           </div>
         </div>
 
-        <!-- Panel Central: El Botón / Display -->
-        <div class="md:col-span-2 flex flex-col items-center justify-center min-h-[300px] border border-line p-6 relative overflow-hidden">
-          
-          <!-- Mensaje de estado -->
-          <div id="test-display" class="text-6xl md:text-8xl font-display italic text-white mb-8 text-center transition-colors duration-200">
-            READY
-          </div>
+        <!-- Panel Central (Todo es el botón) -->
+        <div class="md:col-span-2 relative overflow-hidden">
+          <button id="test-action-btn" class="w-full h-[300px] flex flex-col items-center justify-center border-2 border-line hover:border-mute transition-colors duration-300 cursor-pointer bg-ink focus:outline-none focus:ring-0 group">
+            
+            <div id="test-display" class="text-5xl md:text-7xl font-display italic text-white mb-4 text-center transition-colors duration-200">
+              ¿Listo?
+            </div>
+            
+            <div id="test-sub-display" class="mono text-sm text-mute group-hover:text-white transition-colors">
+              Haz clic aquí para comenzar
+            </div>
 
-          <!-- Botón de acción -->
-          <button id="test-action-btn" class="btn-volt text-xl w-full max-w-xs py-6 relative z-10">
-            INICIAR TEST
           </button>
         </div>
       </div>
 
-      <!-- Panel de Resultados (Oculto al inicio) -->
+      <!-- Panel de Resultados -->
       <div id="test-results" class="hidden mt-8 border-t border-line pt-8">
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
           <div class="border border-line p-4 bg-ink text-center">
@@ -366,7 +367,7 @@
             <span id="res-worst" class="text-3xl text-hot font-bold">0 ms</span>
           </div>
           <div class="border border-line p-4 bg-ink text-center">
-            <span class="mono text-[10px] text-mute uppercase tracking-widest block mb-1">IFI (Fátiga)</span>
+            <span class="mono text-[10px] text-mute uppercase tracking-widest block mb-1">Fatiga (IFI)</span>
             <span id="res-ifi" class="text-3xl text-white font-bold">0 ms</span>
           </div>
         </div>
@@ -374,7 +375,7 @@
         <div class="text-center">
           <p class="text-lg text-white mb-6">
             Tu tiempo de reacción medio es de <strong id="res-avg-text" class="text-neon">0 ms</strong>. 
-            ¿Quieres entrenar tu mente para reducir esa latencia?
+            <br>Los atletas de élite rondan los 200 ms. ¿Quieres entrenar tu mente para llegar ahí?
           </p>
           <a href="#acceso" class="btn-out inline-block">Únete a la lista de espera</a>
           <button id="test-retry" class="text-mute text-sm underline mt-4 hover:text-white transition-colors block mx-auto">Volver a intentar</button>
@@ -389,11 +390,11 @@
   document.addEventListener('DOMContentLoaded', () => {
     const btn = document.getElementById('test-action-btn');
     const display = document.getElementById('test-display');
+    const subDisplay = document.getElementById('test-sub-display');
     const statusText = document.getElementById('test-status');
     const dots = document.querySelectorAll('#progress-dots div');
     const resultsDiv = document.getElementById('test-results');
     
-    // Elementos de resultados
     const resAvg = document.getElementById('res-avg');
     const resBest = document.getElementById('res-best');
     const resWorst = document.getElementById('res-worst');
@@ -401,47 +402,50 @@
     const resAvgText = document.getElementById('res-avg-text');
     const retryBtn = document.getElementById('test-retry');
 
-    let state = 'idle'; // idle, waiting, ready, rest, finished
+    let state = 'idle'; 
     let startTime;
     let timeoutId;
     let currentSeries = 1;
     const TOTAL_SERIES = 3;
-    const ATTEMPTS_PER_SERIES = 1; // Simplificado para 1 intento por serie
     let seriesTimes = [];
 
     btn.addEventListener('click', () => {
       if (state === 'idle') {
         startSeries();
       } else if (state === 'waiting') {
-        // Error: clic antes de tiempo
         clearTimeout(timeoutId);
-        display.textContent = "¡MUY PRONTO!";
-        display.className = "text-5xl md:text-7xl font-display italic text-hot mb-8 text-center";
-        statusText.textContent = "STATUS: ERROR";
         state = 'idle';
-        btn.textContent = "REINTENTAR SERIE " + currentSeries;
+        display.textContent = "¡Muy pronto!";
+        display.className = "text-5xl md:text-7xl font-display italic text-hot mb-4 text-center";
+        subDisplay.textContent = "Espera a que aparezca el color verde.";
+        subDisplay.className = "mono text-sm text-hot";
+        statusText.textContent = "Estado: Error de anticipación";
       } else if (state === 'ready') {
-        // Éxito: tiempo de reacción
         const reactionTime = performance.now() - startTime;
         seriesTimes.push(reactionTime);
         
         display.textContent = `${reactionTime.toFixed(0)} ms`;
-        display.className = "text-6xl md:text-8xl font-display italic text-neon mb-8 text-center";
-        statusText.textContent = "STATUS: DATA CAPTURED";
+        display.className = "text-5xl md:text-7xl font-display italic text-neon mb-4 text-center";
+        subDisplay.textContent = "Tiempo registrado";
+        subDisplay.className = "mono text-sm text-neon";
+        statusText.textContent = "Estado: Datos capturados";
         
-        // Actualizar punto de progreso
         dots[currentSeries - 1].className = "w-3 h-3 bg-neon rounded-full";
 
         if (currentSeries < TOTAL_SERIES) {
           state = 'rest';
-          btn.textContent = "SIGUIENTE SERIE EN 3s...";
-          btn.className = "btn-volt text-xl w-full max-w-xs py-6 opacity-50 cursor-not-allowed";
+          btn.className = "w-full h-[300px] flex flex-col items-center justify-center border-2 border-line bg-ink cursor-not-allowed";
           
           let countdown = 3;
+          display.textContent = `Descanso: ${countdown}s`;
+          display.className = "text-4xl md:text-5xl font-display italic text-white mb-4 text-center";
+          subDisplay.textContent = `Prepárate para la serie ${currentSeries + 1}`;
+          subDisplay.className = "mono text-sm text-mute";
+
           const restInterval = setInterval(() => {
             countdown--;
             if (countdown > 0) {
-              btn.textContent = `SIGUIENTE SERIE EN ${countdown}s...`;
+              display.textContent = `Descanso: ${countdown}s`;
             } else {
               clearInterval(restInterval);
               currentSeries++;
@@ -457,35 +461,38 @@
     function startSeries() {
       state = 'waiting';
       resultsDiv.classList.add('hidden');
-      display.textContent = "ESPERA...";
-      display.className = "text-6xl md:text-8xl font-display italic text-mute mb-8 text-center";
-      statusText.textContent = "STATUS: WAITING FOR SIGNAL";
       
-      btn.textContent = "ESPERA EL VERDE";
-      btn.className = "bg-hot border-2 border-hot text-white text-xl w-full max-w-xs py-6 cursor-not-allowed uppercase font-bold tracking-widest";
+      display.textContent = "Espera...";
+      display.className = "text-5xl md:text-7xl font-display italic text-white mb-4 text-center";
+      subDisplay.textContent = "No hagas clic hasta que se ponga verde";
+      subDisplay.className = "mono text-sm text-mute";
+      statusText.textContent = "Estado: Esperando señal";
+      
+      btn.className = "w-full h-[300px] flex flex-col items-center justify-center border-2 border-line bg-ink cursor-wait";
 
-      const delay = Math.floor(Math.random() * 3000) + 2000; // 2 a 5 segundos
+      const delay = Math.floor(Math.random() * 3000) + 2000; 
       
       timeoutId = setTimeout(() => {
         state = 'ready';
         display.textContent = "¡AHORA!";
-        display.className = "text-6xl md:text-8xl font-display italic text-neon mb-8 text-center animate-pulse";
-        statusText.textContent = "STATUS: SIGNAL DETECTED";
+        display.className = "text-6xl md:text-8xl font-display italic text-black mb-4 text-center animate-pulse";
+        subDisplay.textContent = "";
         
-        btn.textContent = "¡CLIC!";
-        btn.className = "bg-neon border-2 border-neon text-black text-xl w-full max-w-xs py-6 uppercase font-bold tracking-widest";
+        btn.className = "w-full h-[300px] flex flex-col items-center justify-center border-2 border-neon bg-neon cursor-pointer shadow-[0_0_50px_rgba(212,255,0,0.4)]";
+        statusText.textContent = "Estado: ¡Reacciona!";
         startTime = performance.now();
       }, delay);
     }
 
     function resetButtonForNextSeries() {
       state = 'idle';
-      display.textContent = "READY";
-      display.className = "text-6xl md:text-8xl font-display italic text-white mb-8 text-center";
-      statusText.textContent = "STATUS: READY FOR NEXT";
+      display.textContent = "¿Listo?";
+      display.className = "text-5xl md:text-7xl font-display italic text-white mb-4 text-center";
+      subDisplay.textContent = `Haz clic para iniciar la serie ${currentSeries}`;
+      subDisplay.className = "mono text-sm text-mute";
+      statusText.textContent = "Estado: Listo para siguiente serie";
       
-      btn.textContent = `INICIAR SERIE ${currentSeries}`;
-      btn.className = "btn-volt text-xl w-full max-w-xs py-6";
+      btn.className = "w-full h-[300px] flex flex-col items-center justify-center border-2 border-line hover:border-mute transition-colors duration-300 cursor-pointer bg-ink";
     }
 
     function showResults() {
@@ -494,27 +501,27 @@
       const avg = seriesTimes.reduce((a, b) => a + b, 0) / seriesTimes.length;
       const best = Math.min(...seriesTimes);
       const worst = Math.max(...seriesTimes);
-      const ifi = seriesTimes[2] - seriesTimes[0]; // Índice de Fatiga Intra-serie
+      const ifi = seriesTimes[2] - seriesTimes[0]; 
 
       resAvg.textContent = `${avg.toFixed(0)} ms`;
       resBest.textContent = `${best.toFixed(0)} ms`;
       resWorst.textContent = `${worst.toFixed(0)} ms`;
       resIfi.textContent = `${ifi > 0 ? '+' : ''}${ifi.toFixed(0)} ms`;
       
-      // Color dinámico para el IFI
       if (ifi > 10) {
-        resIfi.className = "text-3xl text-hot font-bold"; // Fatiga alta
+        resIfi.className = "text-3xl text-hot font-bold"; 
       } else if (ifi < -10) {
-        resIfi.className = "text-3xl text-neon font-bold"; // Mejora
+        resIfi.className = "text-3xl text-neon font-bold"; 
       } else {
-        resIfi.className = "text-3xl text-white font-bold"; // Estable
+        resIfi.className = "text-3xl text-white font-bold"; 
       }
 
       resAvgText.textContent = `${avg.toFixed(0)} ms`;
       
-      display.textContent = "COMPLETADO";
-      display.className = "text-6xl md:text-8xl font-display italic text-volt mb-8 text-center";
-      statusText.textContent = "STATUS: TEST COMPLETE";
+      display.textContent = "Completado";
+      display.className = "text-5xl md:text-7xl font-display italic text-volt mb-4 text-center";
+      subDisplay.textContent = "";
+      statusText.textContent = "Estado: Evaluación finalizada";
       
       btn.classList.add('hidden');
       resultsDiv.classList.remove('hidden');
