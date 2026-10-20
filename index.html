@@ -538,6 +538,210 @@
   });
 </script>
 <!-- ===================== FIN TEST DE REACCIÓN ===================== -->
+    <!-- ===================== EL MODELO (SECCIÓN NUEVA) ===================== -->
+<style>
+  /* Estilos específicos para la sección del modelo */
+  .na-model-wrapper { background: #050505; color: #f5f5f5; font-family: 'Inter', sans-serif; }
+  .na-model-wrapper .na-hero { min-height: 500px; position: relative; display: flex; align-items: flex-end; padding: 100px 5vw 60px; background: radial-gradient(ellipse at 75% 35%, rgba(0, 71, 255, 0.17), transparent 45%), #050505; border-bottom: 1px solid #2a2a2a; }
+  .na-model-wrapper .na-hero h1 { margin: 0; font-family: 'Bebas Neue', sans-serif; font-size: clamp(60px, 10vw, 120px); line-height: 0.85; text-transform: uppercase; }
+  .na-model-wrapper .na-hero h1 span { display: block; color: #0047ff; }
+  .na-model-wrapper .na-hero-bottom { display: flex; justify-content: space-between; align-items: flex-end; gap: 40px; margin-top: 30px; }
+  .na-model-wrapper .na-hero-description { max-width: 510px; margin: 0; color: #b5b5b5; font-size: 16px; line-height: 1.7; }
+  .na-model-wrapper .na-scroll-indicator { display: flex; align-items: center; gap: 12px; color: #929292; font-family: 'Space Mono', monospace; font-size: 10px; text-transform: uppercase; }
+  .na-model-wrapper .na-scroll-indicator span { width: 36px; height: 1px; background: #d4ff00; }
+  .na-model-wrapper .na-model { padding: 80px 5vw; }
+  .na-model-wrapper .na-model-header { display: flex; justify-content: space-between; align-items: flex-end; gap: 30px; margin-bottom: 50px; }
+  .na-model-wrapper .na-model-header h2 { margin: 18px 0 0; font-family: 'Bebas Neue', sans-serif; font-size: clamp(48px, 6vw, 80px); line-height: 0.9; text-transform: uppercase; }
+  .na-model-wrapper .na-model-header p { max-width: 390px; margin: 0; color: #929292; font-size: 14px; line-height: 1.7; }
+  .na-model-wrapper .na-chart-layout { display: grid; grid-template-columns: minmax(0, 1fr) 330px; gap: 20px; }
+  .na-model-wrapper .na-chart-panel { min-width: 0; padding: 30px; background: #111111; border: 1px solid #2a2a2a; }
+  .na-model-wrapper .na-chart { display: block; width: 100%; height: auto; overflow: visible; }
+  .na-model-wrapper .na-chart-grid { stroke: #252525; stroke-width: 1; stroke-dasharray: 3 5; }
+  .na-model-wrapper .na-chart-axis { fill: #777; font-family: 'Space Mono', monospace; font-size: 10px; }
+  .na-model-wrapper .na-chart-curve { fill: none; stroke: #0047ff; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
+  .na-model-wrapper .na-chart-area { fill: url(#naCurveGradient); }
+  .na-model-wrapper .na-chart-point { fill: #d4ff00; stroke: #050505; stroke-width: 3; }
+  .na-model-wrapper .na-chart-phase-line { stroke: #d4ff00; stroke-width: 1; stroke-dasharray: 4 5; opacity: 0.8; }
+  .na-model-wrapper .na-chart-phase-label { fill: #d4ff00; font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 1px; }
+  .na-model-wrapper .na-phase-panel { display: flex; flex-direction: column; background: #111111; border: 1px solid #2a2a2a; }
+  .na-model-wrapper .na-phase-button { position: relative; display: block; width: 100%; padding: 23px 24px; text-align: left; background: transparent; border: 0; border-bottom: 1px solid #2a2a2a; cursor: pointer; transition: background 180ms ease; color: #f5f5f5; }
+  .na-model-wrapper .na-phase-button:hover { background: #181818; }
+  .na-model-wrapper .na-phase-button.is-active { background: #0047ff; }
+  .na-model-wrapper .na-phase-title { display: block; margin-bottom: 8px; font-family: 'Bebas Neue', sans-serif; font-size: 30px; line-height: 1; text-transform: uppercase; }
+  .na-model-wrapper .na-phase-description { display: block; max-width: 250px; color: #999; font-size: 12px; line-height: 1.6; }
+  .na-model-wrapper .na-phase-button.is-active .na-phase-description { color: #e0e7ff; }
+  .na-model-wrapper .na-phase-detail { display: grid; grid-template-columns: 0.75fr 1.25fr; gap: 50px; padding: 35px 40px; margin-top: 20px; background: #111111; border: 1px solid #2a2a2a; }
+  .na-model-wrapper .na-phase-detail h3 { margin: 16px 0 0; font-family: 'Bebas Neue', sans-serif; font-size: clamp(35px, 5vw, 60px); line-height: 0.95; text-transform: uppercase; }
+  .na-model-wrapper .na-phase-detail-copy p { margin: 0; color: #b0b0b0; font-size: 14px; line-height: 1.8; }
+  .na-model-wrapper .na-phase-note { margin-top: 18px; padding-top: 18px; border-top: 1px solid #2a2a2a; color: #929292; font-family: 'Space Mono', monospace; font-size: 10px; }
+  .na-model-wrapper .na-section-tag { color: #d4ff00; font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; }
+  @media (max-width: 1000px) {
+    .na-model-wrapper .na-chart-layout { grid-template-columns: 1fr; }
+    .na-model-wrapper .na-phase-detail { grid-template-columns: 1fr; gap: 25px; }
+  }
+  @media (max-width: 700px) {
+    .na-model-wrapper .na-hero-bottom { flex-direction: column; align-items: flex-start; }
+    .na-model-wrapper .na-model-header { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+
+<div class="na-model-wrapper">
+  <!-- Hero del modelo -->
+  <div class="na-hero">
+    <div class="na-hero-content">
+      <div class="na-eyebrow" style="margin-bottom: 28px; color: #d4ff00; font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 2px; text-transform: uppercase;">
+        Neuroatletismo / Modelo de entrenamiento
+      </div>
+      <h1>
+        No entrenamos
+        <span>para acumular</span>
+        fatiga.
+      </h1>
+      <div class="na-hero-bottom">
+        <p class="na-hero-description">
+          Entrenamos para adaptarnos. Aplicamos principios de periodización deportiva al rendimiento cognitivo: una arquitectura que organiza carga, fatiga y recuperación para explorar nuevas ventanas de desempeño mental.
+        </p>
+        <a class="na-scroll-indicator" href="#modelo">
+          Explorar el modelo <span></span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sección interactiva -->
+  <div class="na-model" id="modelo">
+    <header class="na-model-header">
+      <div>
+        <span class="na-section-tag">02 / Arquitectura de carga</span>
+        <h2>El ciclo de<br>adaptación</h2>
+      </div>
+      <p>
+        Explora las fases del modelo. Cada etapa representa una función dentro de la organización de la carga cognitiva, desde la construcción de una base hasta la descarga y la adaptación potencial.
+      </p>
+    </header>
+
+    <div class="na-chart-layout">
+      <!-- Gráfico -->
+      <div class="na-chart-panel">
+        <div class="na-chart-topline" style="display: flex; justify-content: space-between; margin-bottom: 20px;">
+          <span class="na-chart-label" style="color: #929292; font-family: 'Space Mono', monospace; font-size: 10px;">Curva conceptual de periodización</span>
+          <span class="na-chart-status" style="color: #d4ff00; font-family: 'Space Mono', monospace; font-size: 10px;">Modelo / In silico</span>
+        </div>
+        <svg class="na-chart" id="naChart" viewBox="0 0 800 440">
+          <defs>
+            <linearGradient id="naCurveGradient" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#0047ff" stop-opacity="0.3" />
+              <stop offset="100%" stop-color="#0047ff" stop-opacity="0" />
+            </linearGradient>
+          </defs>
+          <g class="na-chart-grid">
+            <line x1="65" y1="70" x2="760" y2="70"></line>
+            <line x1="65" y1="140" x2="760" y2="140"></line>
+            <line x1="65" y1="210" x2="760" y2="210"></line>
+            <line x1="65" y1="280" x2="760" y2="280"></line>
+            <line x1="65" y1="350" x2="760" y2="350"></line>
+          </g>
+          <g class="na-chart-axis">
+            <text x="65" y="390">INICIO</text>
+            <text x="760" y="390" text-anchor="end">FIN DEL CICLO</text>
+            <text x="20" y="210" text-anchor="middle" transform="rotate(-90 20 210)">RESPUESTA CONCEPTUAL</text>
+          </g>
+          <path class="na-chart-area" d="M 65 325 C 130 310, 175 270, 230 245 C 290 220, 330 195, 385 135 C 430 90, 465 95, 510 150 C 560 215, 595 285, 650 265 C 700 245, 730 210, 760 185 L 760 350 L 65 350 Z"></path>
+          <path id="naCurve" class="na-chart-curve" d="M 65 325 C 130 310, 175 270, 230 245 C 290 220, 330 195, 385 135 C 430 90, 465 95, 510 150 C 560 215, 595 285, 650 265 C 700 245, 730 210, 760 185"></path>
+          <g id="naPhaseMarkers">
+            <line class="na-chart-phase-line" x1="230" y1="245" x2="230" y2="350"></line>
+            <line class="na-chart-phase-line" x1="385" y1="135" x2="385" y2="350"></line>
+            <line class="na-chart-phase-line" x1="510" y1="150" x2="510" y2="350"></line>
+            <line class="na-chart-phase-line" x1="650" y1="265" x2="650" y2="350"></line>
+            <text class="na-chart-phase-label" x="230" y="370" text-anchor="middle">BASE</text>
+            <text class="na-chart-phase-label" x="385" y="370" text-anchor="middle">PICO</text>
+            <text class="na-chart-phase-label" x="510" y="370" text-anchor="middle">DESCARGA</text>
+            <text class="na-chart-phase-label" x="650" y="370" text-anchor="middle">ADAPTACIÓN</text>
+          </g>
+          <circle id="naActivePoint" class="na-chart-point" cx="230" cy="245" r="8"></circle>
+        </svg>
+        <div class="na-chart-caption" style="display: flex; justify-content: space-between; margin-top: 12px; color: #929292; font-family: 'Space Mono', monospace; font-size: 10px;">
+          <span>Esquema ilustrativo / No es una serie clínica</span>
+          <span>Selección de fase →</span>
+        </div>
+      </div>
+
+      <!-- Selector de fases -->
+      <aside class="na-phase-panel">
+        <div class="na-phase-panel-header" style="padding: 26px 24px; border-bottom: 1px solid #2a2a2a;">
+          <span style="color: #929292; font-family: 'Space Mono', monospace; font-size: 10px;">Selecciona una fase</span>
+        </div>
+        <div class="na-phase-list">
+          <button class="na-phase-button is-active" type="button" data-phase="base">
+            <span class="na-phase-number" style="color: #777; font-family: 'Space Mono', monospace; font-size: 10px;">FASE 01</span>
+            <span class="na-phase-title">Base</span>
+            <span class="na-phase-description">Construcción de capacidades y referencia inicial.</span>
+          </button>
+          <button class="na-phase-button" type="button" data-phase="sobrecarga">
+            <span class="na-phase-number" style="color: #777; font-family: 'Space Mono', monospace; font-size: 10px;">FASE 02</span>
+            <span class="na-phase-title">Sobrecarga</span>
+            <span class="na-phase-description">Incremento planificado de la demanda cognitiva.</span>
+          </button>
+          <button class="na-phase-button" type="button" data-phase="descarga">
+            <span class="na-phase-number" style="color: #777; font-family: 'Space Mono', monospace; font-size: 10px;">FASE 03</span>
+            <span class="na-phase-title">Descarga</span>
+            <span class="na-phase-description">Reducción de carga para explorar recuperación.</span>
+          </button>
+          <button class="na-phase-button" type="button" data-phase="adaptacion">
+            <span class="na-phase-number" style="color: #777; font-family: 'Space Mono', monospace; font-size: 10px;">FASE 04</span>
+            <span class="na-phase-title">Adaptación</span>
+            <span class="na-phase-description">Exploración de una posible nueva ventana de rendimiento.</span>
+          </button>
+        </div>
+      </aside>
+    </div>
+
+    <!-- Detalle dinámico -->
+    <div class="na-phase-detail">
+      <div>
+        <span class="na-phase-detail-label" id="naDetailLabel" style="color: #d4ff00; font-family: 'Space Mono', monospace; font-size: 10px;">Fase 01 / Construcción</span>
+        <h3 id="naDetailTitle">Base</h3>
+      </div>
+      <div class="na-phase-detail-copy">
+        <p id="naDetailDescription">La fase Base establece una referencia inicial de desempeño y prepara al sistema para la progresión de la carga. En esta etapa se busca construir consistencia en las tareas y observar la respuesta inicial a las demandas cognitivas.</p>
+        <p class="na-phase-note" id="naDetailNote">FUNCIÓN DEL MODELO: establecer condiciones iniciales y una referencia para la progresión.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  (() => {
+    "use strict";
+    const phases = {
+      base: { number: "Fase 01 / Construcción", title: "Base", description: "La fase Base establece una referencia inicial de desempeño y prepara al sistema para la progresión de la carga.", note: "FUNCIÓN DEL MODELO: establecer condiciones iniciales.", point: { x: 230, y: 245 } },
+      sobrecarga: { number: "Fase 02 / Intensificación", title: "Sobrecarga", description: "La fase de Sobrecarga representa un incremento planificado de la demanda cognitiva.", note: "FUNCIÓN DEL MODELO: explorar la respuesta ante una mayor demanda.", point: { x: 385, y: 135 } },
+      descarga: { number: "Fase 03 / Recuperación", title: "Descarga", description: "La fase de Descarga representa una reducción planificada de la carga.", note: "FUNCIÓN DEL MODELO: comparar respuestas entre carga alta y reducida.", point: { x: 510, y: 150 } },
+      adaptacion: { number: "Fase 04 / Hipótesis", title: "Adaptación", description: "La fase de Adaptación explora la posibilidad de una nueva ventana de rendimiento tras la descarga.", note: "FUNCIÓN DEL MODELO: explorar una hipótesis de supercompensación.", point: { x: 650, y: 265 } }
+    };
+    const buttons = document.querySelectorAll(".na-model-wrapper .na-phase-button");
+    const detailLabel = document.getElementById("naDetailLabel");
+    const detailTitle = document.getElementById("naDetailTitle");
+    const detailDescription = document.getElementById("naDetailDescription");
+    const detailNote = document.getElementById("naDetailNote");
+    const activePoint = document.getElementById("naActivePoint");
+
+    buttons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const phaseKey = button.dataset.phase;
+        const phase = phases[phaseKey];
+        buttons.forEach((b) => b.classList.toggle("is-active", b === button));
+        detailLabel.textContent = phase.number;
+        detailTitle.textContent = phase.title;
+        detailDescription.textContent = phase.description;
+        detailNote.textContent = phase.note;
+        activePoint.setAttribute("cx", phase.point.x);
+        activePoint.setAttribute("cy", phase.point.y);
+      });
+    });
+  })();
+</script>
+<!-- ===================== FIN EL MODELO ===================== -->
     <!-- PROTOCOLO -->
     <section id="protocolo" class="py-14 md:py-24 bg-coal border-y border-line">
       <div class="max-w-5xl mx-auto px-5">
