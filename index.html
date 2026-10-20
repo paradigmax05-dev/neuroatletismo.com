@@ -298,246 +298,478 @@
       </div>
     </div>
 
-    <!-- ===================== TEST DE REACCIÓN ===================== -->
-<section id="test" class="py-14 md:py-24 bg-ink border-y border-line">
-  <div class="max-w-5xl mx-auto px-5">
-    <div class="text-center max-w-3xl mx-auto mb-12 reveal">
-      <span class="sub block mb-3">[ MÓDULO DE EVALUACIÓN ]</span>
-      <h2 class="heading mb-5">Test de Tiempo de Reacción</h2>
-      <p>Mide tu latencia de procesamiento. ¿Tienes los reflejos de un atleta de élite?</p>
+    
+<!-- NEUROATLETISMO | REACT PERFORMANCE MODULE -->
+<section id="na-react" class="relative overflow-hidden bg-[#050505] text-white py-20 px-5 md:px-10">
+  <div class="max-w-5xl mx-auto">
+
+    <!-- Encabezado -->
+    <div class="flex items-center justify-between gap-4 border-b border-white/15 pb-5 mb-12">
+      <div class="flex items-center gap-3">
+        <span class="w-2 h-2 bg-[#D4FF00] rounded-full"></span>
+        <span class="font-mono text-xs tracking-[0.2em] text-white/60">
+          NEUROATLETISMO / PERFORMANCE LAB
+        </span>
+      </div>
+      <span class="font-mono text-xs text-white/40">MODULE 01</span>
     </div>
 
-    <!-- Interfaz de la Consola -->
-    <div class="bg-coal border border-line p-6 md:p-10 relative">
-      
-      <!-- Barra superior -->
-      <div class="flex justify-between items-center border-b border-line pb-4 mb-8">
-        <div class="mono text-xs text-mute tracking-widest uppercase">Evaluación de Línea Base</div>
-        <div class="mono text-xs text-neon tracking-widest uppercase" id="test-status">Estado: Listo para iniciar</div>
-      </div>
+    <div class="grid md:grid-cols-2 gap-12 md:gap-16 items-start">
 
-      <!-- Pantalla Principal -->
-      <div class="grid md:grid-cols-3 gap-8 items-center">
-        
-        <!-- Panel Izquierdo -->
-        <div class="md:col-span-1 space-y-4">
-          <div class="border border-line p-4 bg-ink">
-            <span class="mono text-[10px] text-mute uppercase tracking-widest block mb-1">Protocolo</span>
-            <span class="text-sm text-white">3 Series // <br>Descanso 3s</span>
+      <!-- Presentación -->
+      <div>
+        <p class="font-mono text-xs tracking-[0.25em] text-[#D4FF00] mb-5">
+          REACTION / 001
+        </p>
+
+        <h2 class="text-5xl md:text-7xl font-black uppercase leading-[0.9] tracking-tight">
+          La velocidad<br>
+          <span class="text-[#D4FF00]">de respuesta.</span>
+        </h2>
+
+        <p class="text-white/60 leading-relaxed mt-7 max-w-md">
+          Una interacción breve para observar cuánto tardas en responder
+          a un estímulo visual. Sin niveles, sin entrenamiento y sin
+          puntuaciones artificiales.
+        </p>
+
+        <div class="grid grid-cols-2 gap-4 mt-9">
+          <div class="border border-white/15 p-4">
+            <span class="block font-mono text-[10px] tracking-widest text-white/40 mb-2">
+              PROTOCOLO
+            </span>
+            <span class="text-sm font-semibold">10 respuestas</span>
           </div>
-          <div class="border border-line p-4 bg-ink">
-            <span class="mono text-[10px] text-mute uppercase tracking-widest block mb-1">Progreso</span>
-            <div class="flex space-x-2 mt-2" id="progress-dots">
-              <div class="w-3 h-3 bg-line rounded-full transition-colors duration-300"></div>
-              <div class="w-3 h-3 bg-line rounded-full transition-colors duration-300"></div>
-              <div class="w-3 h-3 bg-line rounded-full transition-colors duration-300"></div>
-            </div>
+          <div class="border border-white/15 p-4">
+            <span class="block font-mono text-[10px] tracking-widest text-white/40 mb-2">
+              MÉTRICA
+            </span>
+            <span class="text-sm font-semibold">Milisegundos (ms)</span>
           </div>
         </div>
 
-        <!-- Panel Central (Todo es el botón) -->
-        <div class="md:col-span-2 relative overflow-hidden">
-          <button id="test-action-btn" class="w-full h-[300px] flex flex-col items-center justify-center border-2 border-line hover:border-mute transition-colors duration-300 cursor-pointer bg-ink focus:outline-none focus:ring-0 group">
-            
-            <div id="test-display" class="text-5xl md:text-7xl font-display italic text-white mb-4 text-center transition-colors duration-200">
-              ¿Listo?
-            </div>
-            
-            <div id="test-sub-display" class="mono text-sm text-mute group-hover:text-white transition-colors">
-              Haz clic aquí para comenzar
-            </div>
+        <div class="mt-8 text-xs text-white/40 leading-relaxed">
+          <span class="text-white/70 font-semibold">Instrucción:</span>
+          pulsa iniciar y espera. Cuando el panel cambie a verde, responde
+          tan rápido como puedas. No anticipes el estímulo.
+        </div>
+      </div>
 
+      <!-- Área de interacción -->
+      <div class="border border-white/15 bg-[#0B0B0B] p-5 md:p-7">
+        <div class="flex items-center justify-between mb-6">
+          <span class="font-mono text-xs tracking-widest text-white/50">
+            LIVE RESPONSE
+          </span>
+          <span id="na-react-status" class="font-mono text-xs text-white/50"
+                role="status" aria-live="polite">
+            EN ESPERA
+          </span>
+        </div>
+
+        <div id="na-react-panel"
+             class="relative min-h-[250px] flex flex-col items-center justify-center border border-white/10 bg-[#111111] transition-colors duration-150">
+          <span id="na-react-symbol"
+                class="text-6xl font-black text-white/20 select-none"
+                aria-hidden="true">+</span>
+          <p id="na-react-message"
+             class="font-mono text-xs tracking-[0.15em] text-white/50 mt-5 text-center px-4">
+            PREPARADO PARA COMENZAR
+          </p>
+
+          <button id="na-react-target"
+                  type="button"
+                  disabled
+                  aria-label="Área de respuesta al estímulo visual"
+                  class="absolute inset-0 w-full h-full cursor-default focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#D4FF00] disabled:cursor-default">
           </button>
         </div>
-      </div>
 
-      <!-- Panel de Resultados -->
-      <div id="test-results" class="hidden mt-8 border-t border-line pt-8">
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-          <div class="border border-line p-4 bg-ink text-center">
-            <span class="mono text-[10px] text-mute uppercase tracking-widest block mb-1">Promedio</span>
-            <span id="res-avg" class="text-3xl text-neon font-bold">0 ms</span>
-          </div>
-          <div class="border border-line p-4 bg-ink text-center">
-            <span class="mono text-[10px] text-mute uppercase tracking-widest block mb-1">Mejor</span>
-            <span id="res-best" class="text-3xl text-volt font-bold">0 ms</span>
-          </div>
-          <div class="border border-line p-4 bg-ink text-center">
-            <span class="mono text-[10px] text-mute uppercase tracking-widest block mb-1">Peor</span>
-            <span id="res-worst" class="text-3xl text-hot font-bold">0 ms</span>
-          </div>
-          <div class="border border-line p-4 bg-ink text-center">
-            <span class="mono text-[10px] text-mute uppercase tracking-widest block mb-1">Fatiga (IFI)</span>
-            <span id="res-ifi" class="text-3xl text-white font-bold">0 ms</span>
+        <div class="flex items-center justify-between mt-5 mb-2">
+          <span class="font-mono text-xs text-white/40">PROGRESO</span>
+          <span id="na-react-progress" class="font-mono text-xs text-white/70">
+            0 / 10
+          </span>
+        </div>
+
+        <div class="h-1 bg-white/10 overflow-hidden">
+          <div id="na-react-progress-bar"
+               class="h-full bg-[#D4FF00] transition-all duration-200"
+               style="width:0%">
           </div>
         </div>
-        
-        <div class="text-center">
-          <p class="text-lg text-white mb-6">
-            Tu tiempo de reacción medio es de <strong id="res-avg-text" class="text-neon">0 ms</strong>. 
-            <br>Los atletas de élite rondan los 200 ms. ¿Quieres entrenar tu mente para llegar ahí?
-          </p>
-          <a href="#acceso" class="btn-out inline-block">Únete a la lista de espera</a>
-          <button id="test-retry" class="text-mute text-sm underline mt-4 hover:text-white transition-colors block mx-auto">Volver a intentar</button>
-        </div>
-      </div>
 
+        <button id="na-react-start"
+                type="button"
+                class="w-full mt-6 bg-[#D4FF00] text-black font-bold uppercase tracking-widest text-sm py-4 px-5 hover:bg-white transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-white">
+          Iniciar medición <span aria-hidden="true">→</span>
+        </button>
+
+        <p id="na-react-feedback"
+           class="min-h-10 mt-4 text-sm text-white/60 leading-relaxed"
+           role="status" aria-live="polite">
+          Completa la secuencia para consultar tus métricas.
+        </p>
+      </div>
     </div>
+
+    <!-- Resultados -->
+    <div id="na-react-results" class="hidden mt-16">
+      <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 border-b border-white/15 pb-5 mb-7">
+        <div>
+          <p class="font-mono text-xs tracking-[0.2em] text-[#D4FF00] mb-3">
+            SESSION REPORT / 001
+          </p>
+          <h3 class="text-3xl md:text-4xl font-black uppercase">
+            Tu registro de respuesta.
+          </h3>
+        </div>
+        <p class="text-xs text-white/40 font-mono">
+          DATOS DESCRIPTIVOS · SESIÓN ACTUAL
+        </p>
+      </div>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-px bg-white/10 border border-white/10">
+        <div class="bg-[#080808] p-5 md:p-6">
+          <p class="text-xs text-white/45 mb-3">MEDIANA</p>
+          <div class="flex items-baseline gap-1">
+            <span id="na-react-median" class="text-3xl md:text-4xl font-black">—</span>
+            <span class="text-xs text-white/40">ms</span>
+          </div>
+          <p class="text-xs text-white/35 mt-3">Indicador principal</p>
+        </div>
+
+        <div class="bg-[#080808] p-5 md:p-6">
+          <p class="text-xs text-white/45 mb-3">PROMEDIO</p>
+          <div class="flex items-baseline gap-1">
+            <span id="na-react-mean" class="text-3xl md:text-4xl font-black">—</span>
+            <span class="text-xs text-white/40">ms</span>
+          </div>
+          <p class="text-xs text-white/35 mt-3">Media de respuestas</p>
+        </div>
+
+        <div class="bg-[#080808] p-5 md:p-6">
+          <p class="text-xs text-white/45 mb-3">MEJOR TIEMPO</p>
+          <div class="flex items-baseline gap-1">
+            <span id="na-react-best" class="text-3xl md:text-4xl font-black">—</span>
+            <span class="text-xs text-white/40">ms</span>
+          </div>
+          <p class="text-xs text-white/35 mt-3">Respuesta más rápida</p>
+        </div>
+
+        <div class="bg-[#080808] p-5 md:p-6">
+          <p class="text-xs text-white/45 mb-3">VARIABILIDAD</p>
+          <div class="flex items-baseline gap-1">
+            <span id="na-react-variability" class="text-3xl md:text-4xl font-black">—</span>
+            <span class="text-xs text-white/40">ms</span>
+          </div>
+          <p class="text-xs text-white/35 mt-3">Desviación estándar</p>
+        </div>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6 mt-6">
+        <div class="border border-white/10 p-5">
+          <p class="text-xs text-white/45 mb-2">RESPUESTAS ANTICIPADAS</p>
+          <p class="text-2xl font-bold">
+            <span id="na-react-anticipations">0</span>
+            <span class="text-sm font-normal text-white/40">intentos</span>
+          </p>
+          <p class="text-xs text-white/40 mt-2">
+            Clics realizados antes de la aparición del estímulo.
+          </p>
+        </div>
+
+        <div class="border border-white/10 p-5">
+          <p class="text-xs text-white/45 mb-2">LECTURA DEL REGISTRO</p>
+          <p class="text-sm text-white/75 leading-relaxed">
+            Estos valores describen esta sesión. Por sí solos no determinan
+            tu nivel cognitivo, la presencia de fatiga ni tu rendimiento
+            deportivo global.
+          </p>
+        </div>
+      </div>
+
+      <div class="flex flex-col sm:flex-row gap-3 mt-8">
+        <button id="na-react-again"
+                type="button"
+                class="bg-[#D4FF00] text-black font-bold uppercase tracking-widest text-xs px-6 py-4 hover:bg-white transition-colors">
+          Nueva medición ↻
+        </button>
+        <button id="na-react-copy"
+                type="button"
+                class="border border-white/20 text-white font-bold uppercase tracking-widest text-xs px-6 py-4 hover:border-[#D4FF00] transition-colors">
+          Copiar resultados
+        </button>
+      </div>
+      <p id="na-react-copy-status" class="text-xs text-white/40 mt-3" role="status"></p>
+    </div>
+
+    <p class="text-[11px] text-white/30 leading-relaxed mt-12 max-w-3xl">
+      Nota metodológica: la medición depende del dispositivo, la pantalla,
+      el navegador, las condiciones de uso y el estado de la persona.
+      Es una interacción exploratoria, no una evaluación clínica ni una
+      prueba estandarizada. Los resultados no se comparan con normas
+      poblacionales ni con estándares de atletas de élite.
+    </p>
   </div>
 </section>
 
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const btn = document.getElementById('test-action-btn');
-    const display = document.getElementById('test-display');
-    const subDisplay = document.getElementById('test-sub-display');
-    const statusText = document.getElementById('test-status');
-    const dots = document.querySelectorAll('#progress-dots div');
-    const resultsDiv = document.getElementById('test-results');
-    
-    const resAvg = document.getElementById('res-avg');
-    const resBest = document.getElementById('res-best');
-    const resWorst = document.getElementById('res-worst');
-    const resIfi = document.getElementById('res-ifi');
-    const resAvgText = document.getElementById('res-avg-text');
-    const retryBtn = document.getElementById('test-retry');
+(() => {
+  const root = document.getElementById("na-react");
+  if (!root || root.dataset.initialized === "true") return;
+  root.dataset.initialized = "true";
 
-    let state = 'idle'; 
-    let startTime;
-    let timeoutId;
-    let currentSeries = 1;
-    const TOTAL_SERIES = 3;
-    let seriesTimes = [];
+  const $ = (id) => root.querySelector("#" + id);
 
-    btn.addEventListener('click', () => {
-      if (state === 'idle') {
-        startSeries();
-      } else if (state === 'waiting') {
-        clearTimeout(timeoutId);
-        state = 'idle';
-        display.textContent = "¡Muy pronto!";
-        display.className = "text-5xl md:text-7xl font-display italic text-hot mb-4 text-center";
-        subDisplay.textContent = "Espera a que aparezca el color verde.";
-        subDisplay.className = "mono text-sm text-hot";
-        statusText.textContent = "Estado: Error de anticipación";
-      } else if (state === 'ready') {
-        const reactionTime = performance.now() - startTime;
-        seriesTimes.push(reactionTime);
-        
-        display.textContent = `${reactionTime.toFixed(0)} ms`;
-        display.className = "text-5xl md:text-7xl font-display italic text-neon mb-4 text-center";
-        subDisplay.textContent = "Tiempo registrado";
-        subDisplay.className = "mono text-sm text-neon";
-        statusText.textContent = "Estado: Datos capturados";
-        
-        dots[currentSeries - 1].className = "w-3 h-3 bg-neon rounded-full";
+  const panel = $("na-react-panel");
+  const symbol = $("na-react-symbol");
+  const message = $("na-react-message");
+  const target = $("na-react-target");
+  const status = $("na-react-status");
+  const startButton = $("na-react-start");
+  const feedback = $("na-react-feedback");
+  const progress = $("na-react-progress");
+  const progressBar = $("na-react-progress-bar");
+  const results = $("na-react-results");
 
-        if (currentSeries < TOTAL_SERIES) {
-          state = 'rest';
-          btn.className = "w-full h-[300px] flex flex-col items-center justify-center border-2 border-line bg-ink cursor-not-allowed";
-          
-          let countdown = 3;
-          display.textContent = `Descanso: ${countdown}s`;
-          display.className = "text-4xl md:text-5xl font-display italic text-white mb-4 text-center";
-          subDisplay.textContent = `Prepárate para la serie ${currentSeries + 1}`;
-          subDisplay.className = "mono text-sm text-mute";
+  const TOTAL_TRIALS = 10;
+  const MIN_DELAY = 1200;
+  const MAX_DELAY = 3000;
 
-          const restInterval = setInterval(() => {
-            countdown--;
-            if (countdown > 0) {
-              display.textContent = `Descanso: ${countdown}s`;
-            } else {
-              clearInterval(restInterval);
-              currentSeries++;
-              resetButtonForNextSeries();
-            }
-          }, 1000);
-        } else {
-          showResults();
-        }
-      }
-    });
+  let phase = "idle";
+  let timer = null;
+  let trialStartedAt = 0;
+  let validTimes = [];
+  let anticipations = 0;
+  let trialNumber = 0;
+  let runId = 0;
 
-    function startSeries() {
-      state = 'waiting';
-      resultsDiv.classList.add('hidden');
-      
-      display.textContent = "Espera...";
-      display.className = "text-5xl md:text-7xl font-display italic text-white mb-4 text-center";
-      subDisplay.textContent = "No hagas clic hasta que se ponga verde";
-      subDisplay.className = "mono text-sm text-mute";
-      statusText.textContent = "Estado: Esperando señal";
-      
-      btn.className = "w-full h-[300px] flex flex-col items-center justify-center border-2 border-line bg-ink cursor-wait";
+  function clearTimer() {
+    if (timer !== null) {
+      clearTimeout(timer);
+      timer = null;
+    }
+  }
 
-      const delay = Math.floor(Math.random() * 3000) + 2000; 
-      
-      timeoutId = setTimeout(() => {
-        state = 'ready';
-        display.textContent = "¡AHORA!";
-        display.className = "text-6xl md:text-8xl font-display italic text-black mb-4 text-center animate-pulse";
-        subDisplay.textContent = "";
-        
-        btn.className = "w-full h-[300px] flex flex-col items-center justify-center border-2 border-neon bg-neon cursor-pointer shadow-[0_0_50px_rgba(212,255,0,0.4)]";
-        statusText.textContent = "Estado: ¡Reacciona!";
-        startTime = performance.now();
-      }, delay);
+  function setProgress() {
+    progress.textContent = `${validTimes.length} / ${TOTAL_TRIALS}`;
+    progressBar.style.width =
+      `${(validTimes.length / TOTAL_TRIALS) * 100}%`;
+  }
+
+  function setPanel(mode, icon, text) {
+    panel.classList.remove("bg-[#111111]", "bg-[#D4FF00]", "bg-[#FF0055]");
+    panel.classList.add(
+      mode === "ready" ? "bg-[#D4FF00]" :
+      mode === "early" ? "bg-[#FF0055]" :
+      "bg-[#111111]"
+    );
+
+    symbol.textContent = icon;
+    symbol.className =
+      "text-6xl font-black select-none " +
+      (mode === "ready" ? "text-black" :
+       mode === "early" ? "text-white" :
+       "text-white/20");
+
+    message.textContent = text;
+    message.className =
+      "font-mono text-xs tracking-[0.15em] mt-5 text-center px-4 " +
+      (mode === "ready" ? "text-black" : "text-white/65");
+  }
+
+  function resetSession() {
+    runId++;
+    clearTimer();
+
+    phase = "idle";
+    validTimes = [];
+    anticipations = 0;
+    trialNumber = 0;
+    trialStartedAt = 0;
+
+    setProgress();
+    setPanel("idle", "+", "PREPARADO PARA COMENZAR");
+    status.textContent = "EN ESPERA";
+    feedback.textContent =
+      "Completa la secuencia para consultar tus métricas.";
+    startButton.disabled = false;
+    startButton.classList.remove("opacity-50", "cursor-not-allowed");
+    startButton.textContent = "Iniciar medición →";
+    target.disabled = true;
+    results.classList.add("hidden");
+    $("na-react-copy-status").textContent = "";
+  }
+
+  function scheduleStimulus(id) {
+    clearTimer();
+    phase = "waiting";
+    status.textContent = `INTENTO ${validTimes.length + 1} / ${TOTAL_TRIALS}`;
+    target.disabled = false;
+    setPanel("idle", "+", "ESPERA AL ESTÍMULO");
+
+    const delay = MIN_DELAY + Math.random() * (MAX_DELAY - MIN_DELAY);
+
+    timer = setTimeout(() => {
+      if (id !== runId || phase !== "waiting") return;
+
+      phase = "ready";
+      trialStartedAt = performance.now();
+      setPanel("ready", "!", "¡RESPONDE AHORA!");
+      status.textContent = "ESTÍMULO ACTIVO";
+    }, delay);
+  }
+
+  function begin() {
+    resetSession();
+    results.classList.add("hidden");
+
+    phase = "waiting";
+    startButton.disabled = true;
+    startButton.classList.add("opacity-50", "cursor-not-allowed");
+    startButton.textContent = "Medición en curso…";
+    feedback.textContent =
+      "Mantén la atención y responde únicamente cuando aparezca el estímulo verde.";
+
+    const id = runId;
+    scheduleStimulus(id);
+  }
+
+  function handleResponse() {
+    if (phase === "waiting") {
+      // Respuesta anticipada: no se registra como tiempo de reacción.
+      clearTimer();
+      anticipations++;
+      phase = "penalty";
+      status.textContent = "ANTICIPACIÓN";
+      setPanel("early", "×", "RESPUESTA ANTICIPADA");
+      feedback.textContent =
+        "El estímulo todavía no había aparecido. Espera el siguiente intento.";
+      target.disabled = true;
+
+      const id = runId;
+      timer = setTimeout(() => {
+        if (id !== runId || phase !== "penalty") return;
+        scheduleStimulus(id);
+      }, 900);
+      return;
     }
 
-    function resetButtonForNextSeries() {
-      state = 'idle';
-      display.textContent = "¿Listo?";
-      display.className = "text-5xl md:text-7xl font-display italic text-white mb-4 text-center";
-      subDisplay.textContent = `Haz clic para iniciar la serie ${currentSeries}`;
-      subDisplay.className = "mono text-sm text-mute";
-      statusText.textContent = "Estado: Listo para siguiente serie";
-      
-      btn.className = "w-full h-[300px] flex flex-col items-center justify-center border-2 border-line hover:border-mute transition-colors duration-300 cursor-pointer bg-ink";
+    if (phase !== "ready") return;
+
+    const elapsed = performance.now() - trialStartedAt;
+    validTimes.push(elapsed);
+    trialNumber++;
+    phase = "feedback";
+    clearTimer();
+
+    target.disabled = true;
+    setProgress();
+
+    if (validTimes.length >= TOTAL_TRIALS) {
+      finishSession();
+      return;
     }
 
-    function showResults() {
-      state = 'finished';
-      
-      const avg = seriesTimes.reduce((a, b) => a + b, 0) / seriesTimes.length;
-      const best = Math.min(...seriesTimes);
-      const worst = Math.max(...seriesTimes);
-      const ifi = seriesTimes[2] - seriesTimes[0]; 
+    status.textContent = "RESPUESTA REGISTRADA";
+    setPanel("idle", "✓", `${Math.round(elapsed)} ms`);
+    feedback.textContent =
+      `Respuesta ${validTimes.length} de ${TOTAL_TRIALS} registrada. Continúa cuando estés preparado.`;
 
-      resAvg.textContent = `${avg.toFixed(0)} ms`;
-      resBest.textContent = `${best.toFixed(0)} ms`;
-      resWorst.textContent = `${worst.toFixed(0)} ms`;
-      resIfi.textContent = `${ifi > 0 ? '+' : ''}${ifi.toFixed(0)} ms`;
-      
-      if (ifi > 10) {
-        resIfi.className = "text-3xl text-hot font-bold"; 
-      } else if (ifi < -10) {
-        resIfi.className = "text-3xl text-neon font-bold"; 
-      } else {
-        resIfi.className = "text-3xl text-white font-bold"; 
-      }
+    const id = runId;
+    timer = setTimeout(() => {
+      if (id !== runId || phase !== "feedback") return;
+      scheduleStimulus(id);
+    }, 650);
+  }
 
-      resAvgText.textContent = `${avg.toFixed(0)} ms`;
-      
-      display.textContent = "Completado";
-      display.className = "text-5xl md:text-7xl font-display italic text-volt mb-4 text-center";
-      subDisplay.textContent = "";
-      statusText.textContent = "Estado: Evaluación finalizada";
-      
-      btn.classList.add('hidden');
-      resultsDiv.classList.remove('hidden');
+  function median(values) {
+    const sorted = [...values].sort((a, b) => a - b);
+    const middle = Math.floor(sorted.length / 2);
+    return sorted.length % 2
+      ? sorted[middle]
+      : (sorted[middle - 1] + sorted[middle]) / 2;
+  }
+
+  function mean(values) {
+    return values.reduce((sum, value) => sum + value, 0) / values.length;
+  }
+
+  function standardDeviation(values) {
+    const avg = mean(values);
+    const variance = values.reduce(
+      (sum, value) => sum + Math.pow(value - avg, 2), 0
+    ) / values.length;
+    return Math.sqrt(variance);
+  }
+
+  function formatMs(value) {
+    return String(Math.round(value));
+  }
+
+  function finishSession() {
+    clearTimer();
+    phase = "finished";
+    target.disabled = true;
+    startButton.disabled = false;
+    startButton.classList.remove("opacity-50", "cursor-not-allowed");
+    startButton.textContent = "Repetir medición ↻";
+
+    status.textContent = "SESIÓN COMPLETADA";
+    setPanel("idle", "✓", "REGISTRO COMPLETADO");
+    feedback.textContent =
+      "Medición terminada. Consulta abajo el resumen descriptivo de esta sesión.";
+
+    $("na-react-median").textContent = formatMs(median(validTimes));
+    $("na-react-mean").textContent = formatMs(mean(validTimes));
+    $("na-react-best").textContent = formatMs(Math.min(...validTimes));
+    $("na-react-variability").textContent =
+      formatMs(standardDeviation(validTimes));
+    $("na-react-anticipations").textContent = String(anticipations);
+
+    results.classList.remove("hidden");
+  }
+
+  function buildReport() {
+    return [
+      "NEUROATLETISMO — REACT",
+      `Respuestas válidas: ${validTimes.length}/${TOTAL_TRIALS}`,
+      `Mediana: ${formatMs(median(validTimes))} ms`,
+      `Promedio: ${formatMs(mean(validTimes))} ms`,
+      `Mejor tiempo: ${formatMs(Math.min(...validTimes))} ms`,
+      `Variabilidad (desviación estándar): ${formatMs(standardDeviation(validTimes))} ms`,
+      `Respuestas anticipadas: ${anticipations}`,
+      "Nota: medición exploratoria de una sesión; no es una evaluación clínica."
+    ].join("\n");
+  }
+
+  startButton.addEventListener("click", begin);
+  target.addEventListener("click", handleResponse);
+  $("na-react-again").addEventListener("click", begin);
+
+  $("na-react-copy").addEventListener("click", async () => {
+    const copyStatus = $("na-react-copy-status");
+    try {
+      await navigator.clipboard.writeText(buildReport());
+      copyStatus.textContent = "Resultados copiados.";
+    } catch (error) {
+      copyStatus.textContent =
+        "El navegador no permitió copiar automáticamente. Puedes seleccionar los valores y copiarlos manualmente.";
     }
-
-    retryBtn.addEventListener('click', () => {
-      seriesTimes = [];
-      currentSeries = 1;
-      dots.forEach(dot => dot.className = "w-3 h-3 bg-line rounded-full");
-      resultsDiv.classList.add('hidden');
-      btn.classList.remove('hidden');
-      resetButtonForNextSeries();
-    });
   });
+
+  // Evita que Enter o Espacio activen accidentalmente el área durante la espera.
+  target.addEventListener("keydown", (event) => {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+    }
+  });
+
+  resetSession();
+})();
 </script>
-<!-- ===================== FIN TEST DE REACCIÓN ===================== -->
+
     <!-- ===================== EL MODELO (SECCIÓN NUEVA) ===================== -->
 <style>
   /* Estilos específicos para la sección del modelo */
