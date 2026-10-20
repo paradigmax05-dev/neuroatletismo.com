@@ -298,6 +298,239 @@
       </div>
     </div>
 
+    <!-- ===================== TEST DE REACCIÓN ===================== -->
+<section id="test" class="py-14 md:py-24 bg-ink border-y border-line">
+  <div class="max-w-5xl mx-auto px-5">
+    <div class="text-center max-w-3xl mx-auto mb-12 reveal">
+      <span class="sub block mb-3">[ MÓDULO DE EVALUACIÓN // LÍNEA BASE ]</span>
+      <h2 class="heading mb-5">Test de Tiempo de Reacción</h2>
+      <p>Mide tu latencia de procesamiento. El promedio de un atleta de élite es de 250 ms.</p>
+    </div>
+
+    <!-- Interfaz tipo Consola / Dashboard -->
+    <div class="bg-coal border border-line p-6 md:p-10 relative">
+      
+      <!-- Barra superior tipo Sistema -->
+      <div class="flex justify-between items-center border-b border-line pb-4 mb-8">
+        <div class="mono text-xs text-mute tracking-widest">SYS.READY // NTA-REACTION-TEST</div>
+        <div class="mono text-xs text-neon tracking-widest" id="test-status">STATUS: IDLE</div>
+      </div>
+
+      <!-- Pantalla Principal -->
+      <div class="grid md:grid-cols-3 gap-8 items-center">
+        
+        <!-- Panel Izquierdo: Instrucciones / Series -->
+        <div class="md:col-span-1 space-y-4">
+          <div class="border border-line p-4 bg-ink">
+            <span class="mono text-[10px] text-mute uppercase tracking-widest block mb-1">Protocolo</span>
+            <span class="text-sm text-white">3 Series // <br>Descanso 3s</span>
+          </div>
+          <div class="border border-line p-4 bg-ink">
+            <span class="mono text-[10px] text-mute uppercase tracking-widest block mb-1">Progreso</span>
+            <div class="flex space-x-2 mt-2" id="progress-dots">
+              <div class="w-3 h-3 bg-line rounded-full"></div>
+              <div class="w-3 h-3 bg-line rounded-full"></div>
+              <div class="w-3 h-3 bg-line rounded-full"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Panel Central: El Botón / Display -->
+        <div class="md:col-span-2 flex flex-col items-center justify-center min-h-[300px] border border-line p-6 relative overflow-hidden">
+          
+          <!-- Mensaje de estado -->
+          <div id="test-display" class="text-6xl md:text-8xl font-display italic text-white mb-8 text-center transition-colors duration-200">
+            READY
+          </div>
+
+          <!-- Botón de acción -->
+          <button id="test-action-btn" class="btn-volt text-xl w-full max-w-xs py-6 relative z-10">
+            INICIAR TEST
+          </button>
+        </div>
+      </div>
+
+      <!-- Panel de Resultados (Oculto al inicio) -->
+      <div id="test-results" class="hidden mt-8 border-t border-line pt-8">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+          <div class="border border-line p-4 bg-ink text-center">
+            <span class="mono text-[10px] text-mute uppercase tracking-widest block mb-1">Promedio</span>
+            <span id="res-avg" class="text-3xl text-neon font-bold">0 ms</span>
+          </div>
+          <div class="border border-line p-4 bg-ink text-center">
+            <span class="mono text-[10px] text-mute uppercase tracking-widest block mb-1">Mejor</span>
+            <span id="res-best" class="text-3xl text-volt font-bold">0 ms</span>
+          </div>
+          <div class="border border-line p-4 bg-ink text-center">
+            <span class="mono text-[10px] text-mute uppercase tracking-widest block mb-1">Peor</span>
+            <span id="res-worst" class="text-3xl text-hot font-bold">0 ms</span>
+          </div>
+          <div class="border border-line p-4 bg-ink text-center">
+            <span class="mono text-[10px] text-mute uppercase tracking-widest block mb-1">IFI (Fátiga)</span>
+            <span id="res-ifi" class="text-3xl text-white font-bold">0 ms</span>
+          </div>
+        </div>
+        
+        <div class="text-center">
+          <p class="text-lg text-white mb-6">
+            Tu tiempo de reacción medio es de <strong id="res-avg-text" class="text-neon">0 ms</strong>. 
+            ¿Quieres entrenar tu mente para reducir esa latencia?
+          </p>
+          <a href="#acceso" class="btn-out inline-block">Únete a la lista de espera</a>
+          <button id="test-retry" class="text-mute text-sm underline mt-4 hover:text-white transition-colors block mx-auto">Volver a intentar</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const btn = document.getElementById('test-action-btn');
+    const display = document.getElementById('test-display');
+    const statusText = document.getElementById('test-status');
+    const dots = document.querySelectorAll('#progress-dots div');
+    const resultsDiv = document.getElementById('test-results');
+    
+    // Elementos de resultados
+    const resAvg = document.getElementById('res-avg');
+    const resBest = document.getElementById('res-best');
+    const resWorst = document.getElementById('res-worst');
+    const resIfi = document.getElementById('res-ifi');
+    const resAvgText = document.getElementById('res-avg-text');
+    const retryBtn = document.getElementById('test-retry');
+
+    let state = 'idle'; // idle, waiting, ready, rest, finished
+    let startTime;
+    let timeoutId;
+    let currentSeries = 1;
+    const TOTAL_SERIES = 3;
+    const ATTEMPTS_PER_SERIES = 1; // Simplificado para 1 intento por serie
+    let seriesTimes = [];
+
+    btn.addEventListener('click', () => {
+      if (state === 'idle') {
+        startSeries();
+      } else if (state === 'waiting') {
+        // Error: clic antes de tiempo
+        clearTimeout(timeoutId);
+        display.textContent = "¡MUY PRONTO!";
+        display.className = "text-5xl md:text-7xl font-display italic text-hot mb-8 text-center";
+        statusText.textContent = "STATUS: ERROR";
+        state = 'idle';
+        btn.textContent = "REINTENTAR SERIE " + currentSeries;
+      } else if (state === 'ready') {
+        // Éxito: tiempo de reacción
+        const reactionTime = performance.now() - startTime;
+        seriesTimes.push(reactionTime);
+        
+        display.textContent = `${reactionTime.toFixed(0)} ms`;
+        display.className = "text-6xl md:text-8xl font-display italic text-neon mb-8 text-center";
+        statusText.textContent = "STATUS: DATA CAPTURED";
+        
+        // Actualizar punto de progreso
+        dots[currentSeries - 1].className = "w-3 h-3 bg-neon rounded-full";
+
+        if (currentSeries < TOTAL_SERIES) {
+          state = 'rest';
+          btn.textContent = "SIGUIENTE SERIE EN 3s...";
+          btn.className = "btn-volt text-xl w-full max-w-xs py-6 opacity-50 cursor-not-allowed";
+          
+          let countdown = 3;
+          const restInterval = setInterval(() => {
+            countdown--;
+            if (countdown > 0) {
+              btn.textContent = `SIGUIENTE SERIE EN ${countdown}s...`;
+            } else {
+              clearInterval(restInterval);
+              currentSeries++;
+              resetButtonForNextSeries();
+            }
+          }, 1000);
+        } else {
+          showResults();
+        }
+      }
+    });
+
+    function startSeries() {
+      state = 'waiting';
+      resultsDiv.classList.add('hidden');
+      display.textContent = "ESPERA...";
+      display.className = "text-6xl md:text-8xl font-display italic text-mute mb-8 text-center";
+      statusText.textContent = "STATUS: WAITING FOR SIGNAL";
+      
+      btn.textContent = "ESPERA EL VERDE";
+      btn.className = "bg-hot border-2 border-hot text-white text-xl w-full max-w-xs py-6 cursor-not-allowed uppercase font-bold tracking-widest";
+
+      const delay = Math.floor(Math.random() * 3000) + 2000; // 2 a 5 segundos
+      
+      timeoutId = setTimeout(() => {
+        state = 'ready';
+        display.textContent = "¡AHORA!";
+        display.className = "text-6xl md:text-8xl font-display italic text-neon mb-8 text-center animate-pulse";
+        statusText.textContent = "STATUS: SIGNAL DETECTED";
+        
+        btn.textContent = "¡CLIC!";
+        btn.className = "bg-neon border-2 border-neon text-black text-xl w-full max-w-xs py-6 uppercase font-bold tracking-widest";
+        startTime = performance.now();
+      }, delay);
+    }
+
+    function resetButtonForNextSeries() {
+      state = 'idle';
+      display.textContent = "READY";
+      display.className = "text-6xl md:text-8xl font-display italic text-white mb-8 text-center";
+      statusText.textContent = "STATUS: READY FOR NEXT";
+      
+      btn.textContent = `INICIAR SERIE ${currentSeries}`;
+      btn.className = "btn-volt text-xl w-full max-w-xs py-6";
+    }
+
+    function showResults() {
+      state = 'finished';
+      
+      const avg = seriesTimes.reduce((a, b) => a + b, 0) / seriesTimes.length;
+      const best = Math.min(...seriesTimes);
+      const worst = Math.max(...seriesTimes);
+      const ifi = seriesTimes[2] - seriesTimes[0]; // Índice de Fatiga Intra-serie
+
+      resAvg.textContent = `${avg.toFixed(0)} ms`;
+      resBest.textContent = `${best.toFixed(0)} ms`;
+      resWorst.textContent = `${worst.toFixed(0)} ms`;
+      resIfi.textContent = `${ifi > 0 ? '+' : ''}${ifi.toFixed(0)} ms`;
+      
+      // Color dinámico para el IFI
+      if (ifi > 10) {
+        resIfi.className = "text-3xl text-hot font-bold"; // Fatiga alta
+      } else if (ifi < -10) {
+        resIfi.className = "text-3xl text-neon font-bold"; // Mejora
+      } else {
+        resIfi.className = "text-3xl text-white font-bold"; // Estable
+      }
+
+      resAvgText.textContent = `${avg.toFixed(0)} ms`;
+      
+      display.textContent = "COMPLETADO";
+      display.className = "text-6xl md:text-8xl font-display italic text-volt mb-8 text-center";
+      statusText.textContent = "STATUS: TEST COMPLETE";
+      
+      btn.classList.add('hidden');
+      resultsDiv.classList.remove('hidden');
+    }
+
+    retryBtn.addEventListener('click', () => {
+      seriesTimes = [];
+      currentSeries = 1;
+      dots.forEach(dot => dot.className = "w-3 h-3 bg-line rounded-full");
+      resultsDiv.classList.add('hidden');
+      btn.classList.remove('hidden');
+      resetButtonForNextSeries();
+    });
+  });
+</script>
+<!-- ===================== FIN TEST DE REACCIÓN ===================== -->
     <!-- PROTOCOLO -->
     <section id="protocolo" class="py-14 md:py-24 bg-coal border-y border-line">
       <div class="max-w-5xl mx-auto px-5">
